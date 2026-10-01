@@ -18,7 +18,29 @@ html.lenis body, html.lenis-smooth body {
   overscroll-behavior: contain;
 }
 
-body { margin: 0; min-width: 320px; min-height: 100vh; background: #000000; color: #ffffff; overflow-x: hidden; }
+body { 
+  margin: 0; 
+  min-width: 320px; 
+  min-height: 100vh; 
+  background: #000000; 
+  color: #ffffff; 
+  overflow-x: hidden; 
+}
+
+/* Global high-contrast typography hierarchy: guarantee bright text on dark canvas */
+h1, h2, h3, h4, h5, h6 { 
+  color: #ffffff !important; 
+  font-weight: 600;
+}
+
+p { 
+  color: #d4d4d8; 
+}
+
+b, strong {
+  color: #ffffff;
+}
+
 button, input, select, textarea { font: inherit; }
 button { color: inherit; }
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 2px solid #ffffff; outline-offset: 2px; }

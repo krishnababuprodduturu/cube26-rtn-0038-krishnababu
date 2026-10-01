@@ -57,8 +57,8 @@ export default function Analytics() {
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={condition}>
                   <CartesianGrid vertical={false} stroke="rgba(255, 255, 255, 0.07)" strokeDasharray="3 5" />
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#8e9bb0', fontSize: 11 }} />
-                  <YAxis axisLine={false} tickLine={false} tick={{ fill: '#8e9bb0', fontSize: 11 }} allowDecimals={false} />
+                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#d4d4d8', fontSize: 11 }} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fill: '#d4d4d8', fontSize: 11 }} allowDecimals={false} />
                   <Tooltip {...CHART_TOOLTIP} />
                   <Bar dataKey="value" fill="#ffffff" radius={[4, 4, 0, 0]} />
                 </BarChart>

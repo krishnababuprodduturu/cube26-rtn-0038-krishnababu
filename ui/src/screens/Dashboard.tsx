@@ -320,8 +320,8 @@ export default function Dashboard() {
                     </linearGradient>
                   </defs>
                   <CartesianGrid vertical={false} stroke="rgba(255, 255, 255, 0.05)" strokeDasharray="3 3" />
-                  <XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: '#728278', fontSize: 11 }} />
-                  <YAxis axisLine={false} tickLine={false} tick={{ fill: '#728278', fontSize: 11 }} />
+                  <XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: '#d4d4d8', fontSize: 11 }} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fill: '#d4d4d8', fontSize: 11 }} />
                   <Tooltip {...CHART_TOOLTIP} />
                   <Area
                     type="monotone"

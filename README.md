@@ -1,326 +1,214 @@
-# Cube Buildathon · 04 · Returns Manager
+# Returns Manager (RTN-0038)
+### Autonomous Reverse Logistics, Multimodal Vision Inspection & Disposition Intelligence
 
-**Round 2 · Individual Build**
-
-> Five agents, one unit, one record that follows it.
-> A physical product arrives, gets prepped, gets shipped, comes back. At every step a fast operational judgment has to be made and recorded.
-
-**New here? Read these first:**
-
-1. [`GITHUB-GUIDE.md`](GITHUB-GUIDE.md) explains how to fork the repository, set it up, build and push your work.
-2. [`RULES.md`](RULES.md) covers the repository and engineering rules.
+**Developer & System Owner**: Krishna Babu · **Service Name**: `cube26-rtn-0038-krishnababu`  
+**Deployment**: Render Microservice (Docker) · **Position**: Step 4 of 5 in the Autonomous Supply Chain
 
 ---
 
-## Your problem statement: Returns Manager
+## 1. Executive Summary & Commercial Impact
 
-|                              |                                       |
-| ---------------------------- | ------------------------------------- |
-| **Position in the chain**    | Step 4 of 5 · Customer return         |
-| **Customer**                 | Seller, or prep center acting for one |
-| **What gets recorded**       | Condition and disposition             |
-| **Who consumes your output** | Recovery Manager                      |
+When a returned parcel arrives at a warehouse or fulfillment center, operators have fewer than 15 seconds to inspect the item, verify its authenticity, assess damages, and determine its commercial destination. Traditional manual triage suffers from high labor fatigue, inconsistent condition grading, catalog mismatch fraud, and billions in unwarranted liquidation write-downs.
 
-Someone opens a returned parcel. In a few seconds they need to decide:
+**Returns Manager (`RTN-0038`)** is an enterprise-grade, autonomous reverse logistics intelligence system. By fusing **multimodal visual perception (Google Gemini)** with a **deterministic, zero-hallucination policy engine**, Returns Manager extracts empirical evidence from physical return photos, grades condition against Amazon rubric standards, and computes optimal inventory disposition routes in real time.
 
-* Is this the item we sold?
-* Is it complete?
-* What condition is it in?
-* What should happen to it next?
-
-Your agent should make that process structured, consistent and evidence-backed.
-
-### What the agent returns
-
-From appropriate visual/input evidence, the Returns Manager should determine:
-
-* **Identity** against the seller's own catalogue. Is this the ASIN/SKU that was ordered?
-* **Completeness** against the expected parts list: accessories, manuals, cables and other required components.
-* **Condition** using the published condition scale. Do not invent your own condition scale.
-* **Disposition**, such as `restock`, `refurbish`, `liquidate`, `dispose` or `pending_review`.
-
-> Moving even a few percent of returns from liquidation to restock is direct margin. That is the commercial case in one sentence.
-
----
-
-## The chain you are part of
-
-```text
- Supplier delivery      Inbound to Amazon     Outbound to buyer     Customer return        Money back
- ┌──────────────┐      ┌──────────────┐      ┌──────────────┐      ┌──────────────┐      ┌──────────────┐
- │ 01 Receiving │ ───▶ │ 02 Prep      │ ───▶ │ 03 Pack      │ ───▶ │ 04 Returns   │ ───▶ │ 05 Recovery  │
- │ condition on │      │ compliance   │      │ contents at  │      │ condition &  │      │ reads all    │
- │ arrival      │      │ proof        │      │ seal         │      │ disposition  │      │ four → claim │
- └──────────────┘      └──────────────┘      └──────────────┘      └──────────────┘      └──────────────┘
+```
+       [ Customer Return Photos ]
+                   │
+                   ▼
+┌──────────────────────────────────────┐
+│  Phase 1: Visual Perception Engine   │ ◄── Google Gemini Multimodal Vision
+│  • Empirical feature detection       │     (Stateful interaction chaining)
+│  • Serial & barcode recognition      │
+│  • Visible component extraction      │
+└──────────────────┬───────────────────┘
+                   │ Structured Observations
+                   ▼
+┌──────────────────────────────────────┐
+│  Phase 2: Deterministic Policy Gate  │ ◄── Python Rules Engine (R01–R14/R99)
+│  • Sold-vs-Returned catalog matching │     (Zero LLM policy hallucination)
+│  • Bill-of-Materials completeness    │
+│  • Published condition rubric        │
+└──────────────────┬───────────────────┘
+                   │ Disposition Verdict
+                   ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│  Phase 3: Cryptographic Audit Ledger & Execution                       │
+│  • Tamper-evident RFC 8785 Canonical JSON SHA-256 hash chains          │
+│  • Automated inventory routing (Restock / Refurbish / Liquidate)       │
+│  • Multi-tenant Postgres RLS storage & Webhook notifications           │
+└────────────────────────────────────────────────────────────────────────┘
 ```
 
-The first four Managers generate operational evidence. Recovery Manager consumes those records downstream.
-
-Your output should therefore be structured, traceable and usable by the next stage.
+> **The Commercial ROI**: Shifting just 3% to 5% of return volume from indiscriminate liquidation to verified restock directly increases merchant operating margin without increasing customer acquisition costs.
 
 ---
 
-## Reference data
+## 2. Core Operational Capabilities
 
-`data/` contains **synthetic** reference data for development and testing. See [`data/README.md`](data/README.md) for the field definitions.
+The agent systematically answers four mandatory questions for every return unit:
 
-The SKUs, ASINs, FNSKUs, orders, suppliers, operators and amounts are invented. Requirement flags and fee amounts are **not** authoritative Amazon rules or fees.
-
-The `photo_refs` values are placeholders, and images are not included with this repository. Create or use appropriate fixtures for development and evaluation.
-
-All five Buildathon repositories share the same conceptual `unit_id` values, allowing a unit to be followed through the operational chain.
+| Pipeline Stage | Operational Question | Implementation & Ground Truth | Output Verdicts |
+| :--- | :--- | :--- | :--- |
+| **1. Identity** | *Is this the exact SKU/ASIN sold?* | Dual-anchor visual verification against seller catalogue & paperwork cross-checks (`judgment/fusion.py`). | `Matched`, `Mismatch`, `Uncertain` |
+| **2. Completeness** | *Are all required parts present?* | Strict Bill-of-Materials verification against manufacturer parts lists with spatial tagging (`judgment/consistency.py`). | `Complete`, `Incomplete` (with missing part breakdown) |
+| **3. Condition** | *What physical condition is it in?* | Evaluated strictly against published Amazon condition rubrics (`New`, `Like New`, `Very Good`, `Good`, `Acceptable`). | Standardized condition grade & observed defects |
+| **4. Disposition** | *What happens to this unit next?* | Deterministic routing based on merchant category policy, completeness, and grade (`disposition/engine.py`). | `Restock`, `Refurbish`, `Liquidate`, `Dispose`, `Needs Attention` |
 
 ---
 
-## How to build
+## 3. Decoupled Architecture: Perception vs. Policy
 
-This is an **individual Round 2 build**.
+A critical flaw in legacy AI solutions is prompting Large Language Models to directly dictate operational decisions. Under unstructured prompting, LLMs suffer from policy drift, hallucinated fee waivers, and unpredictable disposition switches.
 
-### Your workflow
+Returns Manager introduces strict **Separation of Perception and Policy**:
+1. **Perception Layer (Non-Authoritative)**: The multimodal vision model is constrained strictly to reporting physical observations (visible scratches, seal integrity, visible serial numbers, accessory presence). The model's JSON output schema contains **no disposition field**.
+2. **Policy Layer (Deterministic & Authoritative)**: A hardened Python rule engine (`disposition/engine.py`) takes the model's structured observations, fuses them with catalog records and seller policies, and applies rules `R01` through `R14` (with `R99` as a fallback rule gap). Every verdict is 100% deterministic, auditable, and reproducible without an AI re-run.
 
-```text
-Fork
-  ↓
-Clone
-  ↓
-Understand the problem
-  ↓
-Build
-  ↓
-Test
-  ↓
-Evaluate
-  ↓
-Document
-  ↓
-Deploy / Demo
-  ↓
-Submit
+---
+
+## 4. Dual Runtime Modalities
+
+Returns Manager is engineered to run in two distinct environments:
+
+### 4.1 Enterprise Microservice (Postgres + RLS + API)
+- **FastAPI Core**: Asynchronous REST endpoints for batch intake, unit inspection, evidence retrieval, and telemetry.
+- **Tenancy Isolation via Postgres RLS**: Tenant boundaries are enforced natively at the database layer using Row-Level Security (`org_id = current_setting('app.org_id')`). The application connects as `rm_app_login` (`NOBYPASSRLS`).
+- **Resilient Worker Queue**: Background worker with circuit breakers, daily Gemini free-tier quota guards, and automated fail-open routing to the supervisor review queue (`jobs/worker.py`).
+
+### 4.2 Standalone Batch Processing CLI (Zero-Database)
+- An offline, high-throughput CLI tool (`batch/runner.py`) for processing bulk CSV intake files without requiring Supabase or external persistence.
+- Evaluates sold-vs-returned datasets, builds synthetic product cards, invokes the vision judgment pipeline, and exports RFC-compliant verification CSVs.
+
+---
+
+## 5. Executive White & Black Command Hub
+
+The platform features a custom-engineered, executive monochrome interface designed for high-contrast visibility and cognitive clarity in fast-paced logistics environments:
+
+- **Executive Navigation**: Horizontal command header with telemetry pulse, workspace switcher, and quick review counters.
+- **Bento Grid Analytics**: Real-time distribution charts, condition grade volume, identity mismatch telemetry, and SLA tracking.
+- **Side-by-Side Visual Dossier**: High-resolution inspector view with side-by-side catalog vs. returned photo comparison and zoom inspection.
+- **Supervisor Triage & Review Queue**: Dedicated escalation station for cases flagged as `Uncertain`, damaged, or mismatched.
+- **Unit Digital Passport**: Complete end-to-end lifecycle inspection history with tamper-evident cryptographic hash links.
+
+---
+
+## 6. Cryptographic Auditability & Traceability
+
+Returns Manager serves as Step 4 in the unified supply chain, producing evidence records consumed downstream by the **Recovery Manager**:
+
+- **RFC 8785 Canonical JSON Hashing**: Every observation, image hash, and check result is serialized into Canonical JSON (JCS) and hashed with SHA-256 to ensure byte-level determinism across different programming languages and JSON parsers.
+- **Tamper-Evident Hash Chaining**: Successive return events for each unit are linked via cryptographic hash pointers (`previous_record_hash`), guaranteeing verifiable audit trails for carrier claims and dispute resolution.
+- **Four-Eyes Operator Override**: Human supervisor overrides are explicitly recorded as append-only superseding versions (`ADR-001`, `ADR-007`), preserving the original machine observation intact.
+
+---
+
+## 7. Technology Stack
+
+- **Backend Runtime**: Python 3.12, UV package manager, FastAPI, Pydantic v2
+- **Vision & LLM**: Google Gemini 2.5 Flash via Google GenAI SDK (Stateful session chaining via `previous_interaction_id`)
+- **Database & Security**: PostgreSQL 15+ (Supabase), Row-Level Security (RLS), RFC 8785 JCS, SHA-256
+- **Frontend Architecture**: React 19, TypeScript, Vite, TailwindCSS & Vanilla CSS design tokens, Lucide Icons, Recharts, Framer Motion
+- **DevOps & Deployment**: Docker multi-stage build, Render PaaS (`cube26-rtn-0038-krishnababu`), GitHub Actions
+
+---
+
+## 8. Quickstart & Local Setup
+
+### 8.1 Backend API & Worker
+```sh
+# Navigate to agent directory
+cd agent
+
+# Sync Python virtual environment & dependencies
+uv sync
+
+# Launch local Supabase / Postgres (Docker required)
+npx supabase start
+
+# Apply database migrations and seed demo fixtures
+uv run returns-manager db migrate
+uv run returns-manager seed demo
+
+# Run development verification suite (Lint, Typecheck, Tests, Boundary rules)
+uv run returns-manager dev check
+
+# Start background queue worker
+uv run returns-manager worker
+
+# Start FastAPI application server
+uv run returns-manager api serve --port 8000
 ```
 
-Build your solution in **your own fork** of this repository.
+### 8.2 Frontend Web Console
+```sh
+# Navigate to UI directory
+cd ui
 
-You do not need to create a participant folder in the organiser repository or open a pull request into the organiser repository.
+# Install node dependencies
+npm install
 
----
+# Start local development server
+npm run dev
 
-## What you should focus on
-
-Your Returns Manager should be able to:
-
-```text
-Input / Return Evidence
-        ↓
-     Identity
-        ↓
-   Completeness
-        ↓
-     Condition
-        ↓
-    Disposition
-        ↓
-Structured Evidence Record
+# Compile production bundle
+npm run build
 ```
 
-The exact internal architecture is up to you.
-
-Focus on making the core workflow work reliably before adding unnecessary features.
-
-A worked Returns example may be available in the repository resources. **Read it to understand the expected standard. Do not simply copy it.**
-
----
-
-## Evidence & Decision Traceability
-
-Your agent should produce structured evidence for its decisions.
-
-The official evidence contract includes concepts such as:
-
-* `record_id`
-* `schema_version`
-* `organization_id`
-* `client_id`
-* `agent`
-* `subject`
-* `captured_at`
-* `operator_label`
-* `images`
-* `checks`
-* `outcome`
-* `overrides`
-* `status`
-
-Each check should make the result understandable through its verdict, confidence and supporting detail where applicable.
-
-Use:
-
-* **PASS** when the evidence supports the condition.
-* **FAIL** when the evidence supports that the condition is not met.
-* **UNCERTAIN** when the evidence is insufficient for a reliable judgment.
-
-`UNCERTAIN` is a valid outcome. Do not force ambiguous cases into PASS or FAIL.
-
----
-
-## Cross-Manager Compatibility
-
-Round 2 is individual, but your output will eventually be consumed by Recovery Manager.
-
-Use the **official evidence contract provided by the organisers** as the baseline for interoperability.
-
-Do not create a separate negotiated cross-pod contract for Round 2.
-
-Your decision should allow another system to understand:
-
-```text
-What was returned?
-      ↓
-What was checked?
-      ↓
-What did the agent decide?
-      ↓
-Why?
-      ↓
-What evidence supports it?
+### 8.3 Running the Offline Batch Tool
+```sh
+cd agent
+uv run returns-manager batch process \
+  --before  ../data/before_sample.csv \
+  --returned ../data/returned_sample.csv \
+  --out      ../data/output_inspection.csv
 ```
 
 ---
 
-## Engineering expectations
+## 9. Render Deployment Configuration
 
-Keep the system practical and reliable.
+The repository includes a ready-to-deploy [`render.yaml`](render.yaml) specification:
 
-### Tenancy isolation
-
-If you store persistent data, organisation/client data should remain properly isolated.
-
-### Efficient model usage
-
-Avoid unnecessary repeated model calls. Batch related reasoning where appropriate.
-
-### Fail open
-
-If a model or dependency fails, do not silently discard the input. Preserve the available information and move the case into an appropriate pending/review state.
-
-### Authoritative rules
-
-Where an external rule or requirement is needed, use the authoritative source rather than relying on model memory or synthetic sample values.
-
----
-
-## Evaluation
-
-Evaluation is part of your Round 2 score.
-
-For the visual checks, build an appropriate unseen/held-out evaluation set. Where applicable, use at least **50 unseen units** and have two humans independently label the cases before comparing agent performance.
-
-Report:
-
-* results per important check,
-* false positives,
-* false negatives,
-* `UNCERTAIN` / review rate,
-* important failure modes,
-* latency/cost where relevant.
-
-Do not evaluate only on examples that make the system look successful.
-
-For condition and other visual checks, use genuinely varied cases, including difficult or ambiguous examples.
-
----
-
-## Round 2 evaluation — 100 points
-
-| Criterion                                    |  Points |
-| -------------------------------------------- | ------: |
-| Problem Understanding & Solution Relevance   |  **15** |
-| Agent Functionality & Decision Quality       |  **25** |
-| Evaluation, Accuracy & Uncertainty Handling  |  **25** |
-| Evidence, Traceability & Engineering Quality |  **20** |
-| UX, Demo & Documentation                     |  **15** |
-| **TOTAL**                                    | **100** |
-
-Your Round 2 score is important because participants selected for Round 3 will carry their Round 2 score into the final combined result.
-
----
-
-## Submission
-
-### Submissions open
-
-**27 September 2026**
-
-### Final deadline
-
-**1 October 2026 · 6:00 PM IST**
-
-The submission form closes permanently at the deadline.
-
-**There is no reopening and no resubmission.**
-
-Your final submission should include:
-
-* your GitHub fork,
-* working implementation,
-* `README.md`,
-* `ARCHITECTURE.md`,
-* evaluation results,
-* demo video,
-* deployment URL where applicable,
-* required submission links.
-
-### LinkedIn — Mandatory
-
-You must publish a LinkedIn post about your Round 2 build.
-
-The post must:
-
-* mention your Returns Manager build,
-* explain what you built,
-* tag **CodeQuesters**,
-* tag **Sydon.AI**.
-
-Include the LinkedIn post URL in the submission form.
-
-The organisers will share the official LinkedIn post template separately.
-
----
-
-## Commit rule
-
-All code commits forming your Round 2 submission must be made during the authorised build phase.
-
-Once the build phase ends, do not continue making Round 2 code changes.
-
----
-
-## Final checklist
-
-```text
-[ ] Returns Manager implementation works
-[ ] Working in my own fork
-[ ] README.md complete
-[ ] ARCHITECTURE.md complete
-[ ] Identity tested
-[ ] Completeness tested
-[ ] Condition tested
-[ ] Disposition tested
-[ ] UNCERTAIN / review handling tested
-[ ] Evidence trace implemented
-[ ] Evaluation completed
-[ ] Failure modes documented
-[ ] Demo ready
-[ ] LinkedIn post published
-[ ] CodeQuesters tagged
-[ ] Sydon.AI tagged
-[ ] Submission links verified
-[ ] Final submission ready before 1 October · 6:00 PM IST
+```yaml
+services:
+  - type: web
+    name: cube26-rtn-0038-krishnababu
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: RM_MODEL_PROVIDER
+        value: gemini
+      - key: RM_JUDGMENT_MODEL
+        value: gemini-2.5-flash
 ```
 
-> **Build → Test → Measure → Document → Publish → Submit**
+Pushing to `main` or `krishnababu` triggers an automated Docker image build, schema validation, and zero-downtime deployment.
 
 ---
 
-**Cube Buildathon · 04 · Returns Manager**
+## 10. Architectural Decisions Records (ADRs)
 
-**Round 2 · Individual Build**
+Key architectural choices are formally documented in the [`decisions/`](decisions/) directory:
+- [`ADR-001`](decisions/ADR-001-data-model-and-ids.md): Typed entity prefixes (`ret_`, `pho_`, `rec_`) and RFC 8785 canonical hashing.
+- [`ADR-002`](decisions/ADR-002-rule-2-batch-inspection.md): Batch inspection execution boundary and memory limits.
+- [`ADR-003`](decisions/ADR-003-tenancy-mechanism.md): Strict Postgres RLS tenancy isolation via tenant transactions.
+- [`ADR-004`](decisions/ADR-004-identity-and-auth.md): Dual-role authentication (`operator` vs `supervisor`) and API key scoping.
+- [`ADR-005`](decisions/ADR-005-cross-pod-evidence-contract.md): Cross-manager interoperability contract for downstream Recovery Manager consumption.
+- [`ADR-007`](decisions/ADR-007-hash-chain-scope-and-honest-claim-wording.md): Honest claim boundary: Tamper-evident within database, not immutable.
+- [`ADR-008`](decisions/ADR-008-cost-guards-and-sampling-rates.md): Daily token quota guards and fallback model failover.
+
+---
+
+## 11. Project & Engineering Credentials
+
+- **Engineer**: Krishna Babu (`krishnababu`)
+- **Repository**: [`krishnababuprodduturu/cube26-rtn-0038-krishnababu`](https://github.com/krishnababuprodduturu/cube26-rtn-0038-krishnababu)
+- **Specification ID**: `RTN-0038` · Cube Buildathon Round 2
+- **License**: MIT

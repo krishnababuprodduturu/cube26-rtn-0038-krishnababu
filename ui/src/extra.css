@@ -1059,28 +1059,28 @@
 
 .attention-title-line .record-id {
   font-family: 'DM Mono', monospace;
-  font-weight: 600;
-  color: var(--rm-text-primary);
+  font-weight: 700;
+  color: #ffffff !important;
 }
 
 .attention-title-line .sep {
-  color: var(--rm-text-muted);
+  color: #71717a !important;
 }
 
 .attention-title-line .sku-name {
   font-weight: 600;
-  color: var(--rm-text-primary);
+  color: #ffffff !important;
 }
 
 .attention-title-line .unit-id {
   font-family: 'DM Mono', monospace;
-  color: var(--rm-text-muted);
+  color: #a1a1aa !important;
   font-size: 11px;
 }
 
 .attention-subtext {
-  font-size: 11px;
-  color: var(--rm-text-secondary);
+  font-size: 11.5px;
+  color: #d4d4d8 !important;
   margin-top: 2px;
   white-space: nowrap;
   overflow: hidden;
