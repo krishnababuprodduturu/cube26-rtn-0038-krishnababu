@@ -19,7 +19,7 @@ import { motion, type Variants } from 'framer-motion'
 import { Area, AreaChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { useBatchStore } from '../lib/store'
 import { DISPOSITION_COLORS, dispositionMix, needsAttention, rowsPerJob } from '../lib/derive'
-import { Button, Header, Metric, Note } from './shared'
+import { Button, Note } from './shared'
 
 const CHART_TOOLTIP = {
   contentStyle: {
@@ -73,25 +73,64 @@ export default function Dashboard() {
   const activity = rowsPerJob(jobs)
   const mix = dispositionMix(rows)
   const totalMix = mix.reduce((sum, m) => sum + m.value, 0) || 1
+  const completedJobsCount = jobs.filter((j) => j.status === 'done').length
+  const defaultUnitId = rows[0]?.unit_id || 'UNIT-0001'
+
+  const approvalRate = rows.length > 0 ? Math.round((autoApprovedCount / rows.length) * 100) : 0
+  const restockRate = rows.length > 0 ? Math.round((restockCount / rows.length) * 100) : 0
 
   return (
     <motion.div className="dashboard-content" variants={containerVariants} initial="hidden" animate="visible">
+      {/* ========================================================
+          PANORAMIC OPERATIONS COMMAND HERO
+         ======================================================== */}
       <motion.div variants={sectionVariants}>
-        <Header
-          eyebrow="WORKSPACE OVERVIEW"
-          title="Returns Overview"
-          subtitle="Real-time reverse logistics ledger, automated vision verdicts, and supervisor escalation queue."
-          actions={
-            <>
-              <Button icon={RefreshCw} onClick={() => void refresh()}>
-                Refresh
-              </Button>
-              <Button primary icon={Plus} onClick={() => navigate('/returns/new')}>
-                New Batch Upload
-              </Button>
-            </>
-          }
-        />
+        <div className="nexus-hero-banner">
+          <div className="nexus-hero-left">
+            <div className="nexus-hero-node-badge">
+              <span className="telemetry-pulse" />
+              <span>VISION NODE // OPERATIONAL GATE ACTIVE</span>
+            </div>
+            <h1 className="nexus-hero-title">Autonomous Returns & Perception Intelligence</h1>
+            <p className="nexus-hero-sub">
+              High-throughput multimodal reverse logistics. Automated condition verdicts derived from Amazon ground truth rubrics with RFC 8785 cryptographic audit verification.
+            </p>
+            <div className="nexus-hero-telemetry-row">
+              <span>RFC 8785 Chain: <span className="highlight">VERIFIED</span></span>
+              <span>·</span>
+              <span>Inspection Latency: <span className="highlight">&lt; 1.2s</span></span>
+              <span>·</span>
+              <span>Auto-Approval Rate: <span className="highlight">{approvalRate}%</span></span>
+              <span>·</span>
+              <span>Active Catalog: <span className="highlight">12 Verified SKUs</span></span>
+            </div>
+          </div>
+
+          <div className="nexus-hero-actions">
+            <button className="nexus-btn-primary" onClick={() => navigate('/returns/new')}>
+              <Plus size={15} />
+              <span>Ingest Batch CSV</span>
+            </button>
+            <button
+              className="nexus-btn-warning"
+              onClick={() => navigate('/reviews')}
+              style={{
+                borderColor: attention.length > 0 ? 'rgba(245, 158, 11, 0.5)' : 'rgba(255, 255, 255, 0.1)',
+                color: attention.length > 0 ? '#fbbf24' : '#94a3b8',
+              }}
+            >
+              <Eye size={15} />
+              <span>Review Queue ({attention.length})</span>
+            </button>
+            <button className="nexus-btn-glass" onClick={() => navigate(`/units/${defaultUnitId}`)}>
+              <PackageCheck size={15} />
+              <span>Unit Passports</span>
+            </button>
+            <button className="nexus-btn-glass" onClick={() => void refresh()} title="Reload data">
+              <RefreshCw size={14} />
+            </button>
+          </div>
+        </div>
       </motion.div>
 
       {rows.length === 0 && !loading && (
@@ -117,139 +156,132 @@ export default function Dashboard() {
         </motion.section>
       )}
 
-      {/* Modern Cybernetic Operations Strip */}
-      <motion.div variants={sectionVariants}>
-        <div
-          className="operations-strip"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '12px',
-            padding: '10px 16px',
-            background: 'rgba(12, 16, 26, 0.75)',
-            border: '1px solid rgba(6, 182, 212, 0.25)',
-            borderRadius: '10px',
-            marginBottom: '16px',
-            backdropFilter: 'blur(12px)',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', fontFamily: '"JetBrains Mono", monospace' }}>
-            <span
-              style={{
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                background: '#10b981',
-                boxShadow: '0 0 10px rgba(16, 185, 129, 0.7)',
-                display: 'inline-block',
-              }}
-            />
-            <strong style={{ color: '#fff', letterSpacing: '0.5px' }}>NEXUS VISION CORE</strong>
-            <span style={{ color: 'var(--rm-text-muted)' }}>·</span>
-            <span style={{ color: '#38bdf8' }}>RFC 8785 AUDIT CHAIN VERIFIED</span>
-            <span style={{ color: 'var(--rm-text-muted)' }}>·</span>
-            <span style={{ color: 'var(--rm-text-secondary)' }}>INSPECTION LATENCY &lt; 1.2s</span>
+      {/* ========================================================
+          ASYMMETRICAL EXECUTIVE BENTO KPI MATRIX
+         ======================================================== */}
+      <motion.div className="nexus-bento-grid" variants={sectionVariants}>
+        {/* Bento 1: Featured Ingestion Throughput (Wide 2-col) */}
+        <div className="bento-card wide-card">
+          <div className="bento-card-top">
+            <div className="bento-icon-wrap cyan">
+              <Package size={18} />
+            </div>
+            <span className="bento-badge">
+              {completedJobsCount} BATCH{completedJobsCount === 1 ? '' : 'ES'} COMPLETED
+            </span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <button
-              onClick={() => navigate('/returns')}
+          <div>
+            <div className="bento-label">Total Ingested Returns</div>
+            <div className="bento-value">{rows.length}</div>
+            <div className="bento-note">
+              <span>Evaluated through deterministic visual comparison engine</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Bento 2: Auto-Approved Pass */}
+        <div className="bento-card">
+          <div className="bento-card-top">
+            <div className="bento-icon-wrap emerald">
+              <BadgeCheck size={18} />
+            </div>
+            <span className="bento-badge" style={{ color: '#34d399', borderColor: 'rgba(16, 185, 129, 0.3)' }}>
+              {approvalRate}% OF INTAKE
+            </span>
+          </div>
+          <div>
+            <div className="bento-label">Auto-Approved</div>
+            <div className="bento-value" style={{ color: '#34d399' }}>
+              {rows.length === 0 ? '0' : autoApprovedCount}
+            </div>
+            <div className="bento-note">High confidence · Instant refund</div>
+          </div>
+        </div>
+
+        {/* Bento 3: Auto-Disapproved Discrepancies */}
+        <div className="bento-card">
+          <div className="bento-card-top">
+            <div className="bento-icon-wrap crimson">
+              <XCircle size={18} />
+            </div>
+            <span className="bento-badge" style={{ color: '#fb7185', borderColor: 'rgba(239, 68, 68, 0.3)' }}>
+              FRAUD / DAMAGE
+            </span>
+          </div>
+          <div>
+            <div className="bento-label">Auto-Disapproved</div>
+            <div className="bento-value" style={{ color: '#fb7185' }}>
+              {rows.length === 0 ? '0' : autoDisapprovedCount}
+            </div>
+            <div className="bento-note">Discrepancy / wrong item detected</div>
+          </div>
+        </div>
+
+        {/* Bento 4: Certified Restock Inventory */}
+        <div className="bento-card">
+          <div className="bento-card-top">
+            <div className="bento-icon-wrap cyan">
+              <PackageCheck size={18} />
+            </div>
+            <span className="bento-badge" style={{ color: '#38bdf8', borderColor: 'rgba(6, 182, 212, 0.3)' }}>
+              {restockRate}% RECOVERY
+            </span>
+          </div>
+          <div>
+            <div className="bento-label">Restock Eligible</div>
+            <div className="bento-value" style={{ color: '#38bdf8' }}>
+              {rows.length === 0 ? '0' : restockCount}
+            </div>
+            <div className="bento-note">Certified for warehouse stock</div>
+          </div>
+        </div>
+
+        {/* Bento 5: Supervisor Review Gate */}
+        <div className="bento-card">
+          <div className="bento-card-top">
+            <div className="bento-icon-wrap amber">
+              <Eye size={18} />
+            </div>
+            <span
+              className="bento-badge"
               style={{
-                background: 'rgba(6, 182, 212, 0.12)',
-                border: '1px solid rgba(6, 182, 212, 0.35)',
-                color: '#22d3ee',
-                padding: '4px 10px',
-                borderRadius: '6px',
-                fontSize: '11px',
-                fontWeight: 600,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '5px',
-                transition: 'all 0.2s',
+                color: attention.length > 0 ? '#fbbf24' : '#94a3b8',
+                borderColor: attention.length > 0 ? 'rgba(245, 158, 11, 0.4)' : 'rgba(255, 255, 255, 0.1)',
               }}
             >
-              <span>Returns Ledger ({rows.length})</span>
-              <ChevronRight size={13} />
-            </button>
-            <button
-              onClick={() => navigate('/reviews')}
-              style={{
-                background: attention.length > 0 ? 'rgba(255, 170, 0, 0.14)' : 'rgba(255, 255, 255, 0.04)',
-                border: attention.length > 0 ? '1px solid rgba(255, 170, 0, 0.4)' : '1px solid rgba(255, 255, 255, 0.1)',
-                color: attention.length > 0 ? '#ffaa00' : 'var(--rm-text-secondary)',
-                padding: '4px 10px',
-                borderRadius: '6px',
-                fontSize: '11px',
-                fontWeight: 600,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '5px',
-                transition: 'all 0.2s',
-              }}
-            >
-              <span>Review Queue ({attention.length})</span>
-              <ChevronRight size={13} />
-            </button>
+              {attention.length > 0 ? 'SIGN-OFF NEEDED' : 'CLEAR'}
+            </span>
+          </div>
+          <div>
+            <div className="bento-label">Review Queue</div>
+            <div className="bento-value" style={{ color: attention.length > 0 ? '#fbbf24' : '#f8fafc' }}>
+              {attention.length}
+            </div>
+            <div className="bento-note">Awaiting supervisor decision</div>
+          </div>
+        </div>
+
+        {/* Bento 6: Vision Model Runs (Wide 2-col) */}
+        <div className="bento-card wide-card">
+          <div className="bento-card-top">
+            <div className="bento-icon-wrap blue">
+              <Cpu size={18} />
+            </div>
+            <span className="bento-badge">GPU PERCEPTUAL ENGINE</span>
+          </div>
+          <div>
+            <div className="bento-label">Vision Model Runs</div>
+            <div className="bento-value">{liveRequests}</div>
+            <div className="bento-note">
+              <span>Multimodal perceptual inferences across item photo pairs</span>
+            </div>
           </div>
         </div>
       </motion.div>
 
-      {/* Structured 6-Metric Tile Strip */}
-      <motion.div className="metrics-grid" variants={sectionVariants}>
-        <Metric
-          index={0}
-          label="Total returns"
-          value={String(rows.length)}
-          note={`Across ${jobs.filter((j) => j.status === 'done').length} completed batch(es)`}
-          icon={Package}
-          tone="default"
-        />
-        <Metric
-          index={1}
-          label="Auto-approved"
-          value={rows.length === 0 ? '0' : String(autoApprovedCount)}
-          note="High confidence · Instant verdict"
-          icon={BadgeCheck}
-          tone="emerald"
-        />
-        <Metric
-          index={2}
-          label="Auto-disapproved"
-          value={rows.length === 0 ? '0' : String(autoDisapprovedCount)}
-          note="Discrepancy / wrong item"
-          icon={XCircle}
-          tone="crimson"
-        />
-        <Metric
-          index={3}
-          label="Review queue"
-          value={String(attention.length)}
-          note="Awaiting supervisor decision"
-          icon={Eye}
-          tone="amber"
-        />
-        <Metric
-          index={4}
-          label="Restock eligible"
-          value={rows.length === 0 ? '0' : String(restockCount)}
-          note="Certified for shelf inventory"
-          icon={PackageCheck}
-          tone="teal"
-        />
-        <Metric
-          index={5}
-          label="Vision model runs"
-          value={String(liveRequests)}
-          note="Multimodal perceptual inferences"
-          icon={Cpu}
-          tone="blue"
-        />
-      </motion.div>
-
-      {/* Main Data Panels */}
+      {/* ========================================================
+          VISUAL INTELLIGENCE & DISPOSITION RADAR (SPLIT 65% / 35%)
+         ======================================================== */}
       <motion.div className="dashboard-grid" variants={sectionVariants}>
         <section className="panel chart-panel">
           <div className="panel-header">
@@ -314,7 +346,7 @@ export default function Dashboard() {
             )}
           </div>
           <div className="panel-footer-meta">
-            <span>{rows.length} total return rows ingested across {jobs.filter((j) => j.status === 'done').length} uploads</span>
+            <span>{rows.length} total return rows ingested across {completedJobsCount} uploads</span>
           </div>
         </section>
 
@@ -375,7 +407,9 @@ export default function Dashboard() {
         </section>
       </motion.div>
 
-      {/* Enterprise Policy & Governance Strip */}
+      {/* ========================================================
+          ENTERPRISE CRYPTOGRAPHIC GOVERNANCE STRIP
+         ======================================================== */}
       <motion.div className="governance-strip" variants={sectionVariants}>
         <div className="gov-left">
           <div className="gov-badge">
@@ -403,7 +437,9 @@ export default function Dashboard() {
         </div>
       </motion.div>
 
-      {/* Needs Attention Queue */}
+      {/* ========================================================
+          SUPERVISOR ESCALATION & TRIAGE STATION
+         ======================================================== */}
       <motion.section className="panel attention-panel" variants={sectionVariants}>
         <div className="panel-header">
           <div>

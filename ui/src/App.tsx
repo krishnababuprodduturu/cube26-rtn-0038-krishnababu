@@ -15,12 +15,12 @@ import {
   FileCheck2,
   LayoutDashboard,
   Menu,
-  MoreHorizontal,
   Package,
-  PanelLeftClose,
   Plus,
   Search,
   Settings,
+  Sun,
+  Moon,
   Truck,
   X,
   type LucideIcon,
@@ -49,35 +49,19 @@ import SettingsPage from './screens/Settings'
 
 import './styles.css'
 
-const groups: { title: string; items: [string, string, LucideIcon][] }[] = [
-  {
-    title: 'WORKSPACE',
-    items: [
-      ['Overview', '/dashboard', LayoutDashboard],
-      ['Returns', '/returns', Package],
-      ['New inspection', '/returns/new', Plus],
-      ['Review queue', '/reviews', ClipboardCheck],
-    ],
-  },
-  {
-    title: 'INTELLIGENCE',
-    items: [
-      ['Product catalogue', '/catalogue', Boxes],
-      ['Evidence & audit', '/evidence', FileCheck2],
-      ['Analytics', '/analytics', Activity],
-    ],
-  },
-  {
-    title: 'CONFIGURATION',
-    items: [
-      ['Integrations', '/integrations', Truck],
-      ['Settings', '/settings', Settings],
-    ],
-  },
-] as const
+const navItems: { label: string; path: string; icon: LucideIcon; badgeKey?: 'queue' }[] = [
+  { label: 'Overview', path: '/dashboard', icon: LayoutDashboard },
+  { label: 'Returns', path: '/returns', icon: Package },
+  { label: 'New Inspection', path: '/returns/new', icon: Plus },
+  { label: 'Review Queue', path: '/reviews', icon: ClipboardCheck, badgeKey: 'queue' },
+  { label: 'Analytics', path: '/analytics', icon: Activity },
+  { label: 'Catalogue', path: '/catalogue', icon: Boxes },
+  { label: 'Evidence & Audit', path: '/evidence', icon: FileCheck2 },
+  { label: 'Integrations', path: '/integrations', icon: Truck },
+  { label: 'Settings', path: '/settings', icon: Settings },
+]
 
 function Shell({ children }: { children: ReactNode }) {
-  const [collapsed, setCollapsed] = useState(false)
   const [mobile, setMobile] = useState(false)
   const [search, setSearch] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -164,211 +148,205 @@ function Shell({ children }: { children: ReactNode }) {
     <div className={shellClass}>
       {location.pathname !== '/overview' && <AmbientCanvas intensity={0.75} />}
       {mobile && <button className="scrim" onClick={() => setMobile(false)} aria-label="Close menu" />}
-      <aside className={`sidebar ${collapsed ? 'collapsed' : ''} ${mobile ? 'mobile-open' : ''}`}>
-        <div className="brand">
-          <Link
-            to="/overview"
-            style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: 'inherit' }}
-          >
-            <span className="nexus-mark">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2L21 7V17L12 22L3 17V7L12 2Z" stroke="#06b6d4" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M12 6L18 9.5V14.5L12 18L6 14.5V9.5L12 6Z" fill="rgba(6, 182, 212, 0.18)" stroke="#3b82f6" strokeWidth="1.2"/>
-                <circle cx="12" cy="12" r="2.5" fill="#06b6d4"/>
-              </svg>
-            </span>
-            {!collapsed && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-                <strong style={{ fontFamily: "'Outfit', 'Inter', sans-serif", fontSize: '15px', fontWeight: 700, letterSpacing: '0.04em' }}>
-                  NEXUS<span style={{ color: '#06b6d4' }}>//RETURNS</span>
-                </strong>
-                <span
-                  style={{
-                    fontSize: '9px',
-                    fontWeight: 700,
-                    fontFamily: '"JetBrains Mono", monospace',
-                    padding: '2px 6px',
-                    borderRadius: '4px',
-                    background: 'rgba(6, 182, 212, 0.16)',
-                    color: '#38bdf8',
-                    border: '1px solid rgba(6, 182, 212, 0.35)',
-                    letterSpacing: '0.08em',
-                  }}
-                >
-                  AI v2.4
+
+      {location.pathname !== '/overview' && (
+        <>
+          {/* ========================================================
+              TIER 1: MODERN HORIZONTAL COMMAND NAVIGATION HEADER
+             ======================================================== */}
+          <header className="nexus-platform-header">
+            <div className="nexus-header-left">
+              <Link to="/overview" className="nexus-brand-link">
+                <span className="nexus-mark">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2L21 7V17L12 22L3 17V7L12 2Z" stroke="#06b6d4" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M12 6L18 9.5V14.5L12 18L6 14.5V9.5L12 6Z" fill="rgba(6, 182, 212, 0.18)" stroke="#3b82f6" strokeWidth="1.2"/>
+                    <circle cx="12" cy="12" r="2.5" fill="#06b6d4"/>
+                  </svg>
                 </span>
-              </div>
-            )}
-          </Link>
-          <button
-            className="icon-button collapse-btn"
-            title="Collapse sidebar"
-            onClick={() => setCollapsed(!collapsed)}
-          >
-            <PanelLeftClose size={16} />
-          </button>
-          <button
-            className="icon-button mobile-close-btn"
-            title="Close navigation"
-            onClick={() => setMobile(false)}
-          >
-            <X size={18} />
-          </button>
-        </div>
+                <div className="nexus-brand-text">
+                  <strong style={{ fontFamily: "'Outfit', 'Inter', sans-serif", fontSize: '15px', fontWeight: 700, letterSpacing: '0.03em' }}>
+                    NEXUS<span style={{ color: '#06b6d4' }}>//RETURNS</span>
+                  </strong>
+                  <span className="nexus-version-pill">AI v2.4</span>
+                </div>
+              </Link>
 
-        <button className="workspace" onClick={() => navigate('/dashboard')}>
-          <span className="workspace-logo" style={{ background: 'linear-gradient(135deg, #06b6d4, #3b82f6)', color: '#fff', fontWeight: 800 }}>
-            NX
-          </span>
-          {!collapsed && (
-            <>
-              <span>
-                <b>Operations HQ</b>
-                <small>Autonomous Vision Node</small>
-              </span>
-              <ChevronDown size={14} />
-            </>
-          )}
-        </button>
+              <button className="nexus-workspace-pill" onClick={() => navigate('/dashboard')} title="Operations HQ Node">
+                <span className="nexus-ws-dot" />
+                <span className="nexus-ws-name">Operations HQ</span>
+                <ChevronDown size={12} className="nexus-ws-caret" />
+              </button>
+            </div>
 
-        <nav>
-          {groups.map((group) => (
-            <div className="nav-group" key={group.title}>
-              <small className="nav-label">{!collapsed && group.title}</small>
-              {group.items.map(([label, path, Icon]) => {
+            {/* Center Horizontal Nav Pills */}
+            <nav className="nexus-header-nav">
+              {navItems.map(({ label, path, icon: Icon, badgeKey }) => {
                 const targetPath = label === 'Unit passports' ? `/units/${defaultUnitId}` : path
                 const isActive =
-                  label === 'Unit passports'
-                    ? location.pathname.startsWith('/units/')
-                    : path === '/returns'
-                      ? location.pathname === '/returns' ||
-                        (location.pathname.startsWith('/returns/') && !location.pathname.endsWith('/new'))
-                      : location.pathname === path
+                  path === '/returns'
+                    ? location.pathname === '/returns' ||
+                      (location.pathname.startsWith('/returns/') && !location.pathname.endsWith('/new') && !location.pathname.includes('/inspection'))
+                    : location.pathname === path
+
+                const isNew = path === '/returns/new'
 
                 return (
                   <Link
-                    title={collapsed ? label : undefined}
-                    className={`nav-link ${isActive ? 'active' : ''}`}
-                    to={targetPath}
                     key={label}
+                    to={targetPath}
+                    className={`nexus-nav-tab ${isActive ? 'active' : ''} ${isNew ? 'nexus-nav-tab-cta' : ''}`}
                     onClick={() => {
-                      if (label === 'New inspection' && !inFlightJob) {
+                      if (path === '/returns/new' && !inFlightJob) {
                         setActiveJobId(null)
                       }
                     }}
                   >
-                    <Icon size={18} strokeWidth={1.8} />
+                    <Icon size={14} strokeWidth={isActive ? 2.2 : 1.8} />
                     <span>{label}</span>
-                    {label === 'Review queue' && queueCount > 0 && <i className="nav-badge">{queueCount}</i>}
+                    {badgeKey === 'queue' && queueCount > 0 && (
+                      <span className="nexus-nav-badge">{queueCount}</span>
+                    )}
                   </Link>
                 )
               })}
+            </nav>
+
+            {/* Right Tools & Profile */}
+            <div className="nexus-header-right">
+              <button
+                className="nexus-search-trigger"
+                onClick={() => {
+                  setSearchQuery('')
+                  setSearch(true)
+                }}
+              >
+                <Search size={13} />
+                <span>Search...</span>
+                <kbd><Command size={10} />K</kbd>
+              </button>
+
+              <Link
+                to="/overview"
+                className="nexus-console-btn"
+                title="Launch Panoramic 3D Vision Console"
+              >
+                <Activity size={13} />
+                <span>Console</span>
+              </Link>
+
+              <button
+                className="nexus-tool-btn"
+                onClick={() => {
+                  if (queueCount > 0) {
+                    navigate('/reviews')
+                    flash(`${queueCount} item${queueCount === 1 ? '' : 's'} awaiting review`)
+                  } else {
+                    flash('All items reviewed · No pending alerts')
+                  }
+                }}
+                aria-label="Notifications"
+                title={queueCount > 0 ? `${queueCount} items in review queue` : 'No notifications'}
+              >
+                <Bell size={15} />
+                {queueCount > 0 && <span className="nexus-bell-dot" />}
+              </button>
+
+              <button
+                className="nexus-tool-btn"
+                onClick={() => setDark(!dark)}
+                aria-label="Toggle theme"
+                title="Toggle theme"
+              >
+                {dark ? <Sun size={15} /> : <Moon size={15} />}
+              </button>
+
+              <button className="nexus-profile-pill" onClick={() => navigate('/settings')}>
+                <span className="nexus-avatar-circ">OP</span>
+                <span className="nexus-profile-role">Lead</span>
+              </button>
+
+              <button className="nexus-mobile-menu-btn" onClick={() => setMobile(true)} aria-label="Open Navigation">
+                <Menu size={18} />
+              </button>
             </div>
-          ))}
-        </nav>
+          </header>
 
-        <div className="side-bottom">
-          <div className="system-health">
-            <i />
-            {!collapsed && (
-              <>
-                All systems operational <span>99.98%</span>
-              </>
-            )}
-          </div>
-          <button className="user-profile" onClick={() => navigate('/settings')}>
-            <span className="user-avatar">OP</span>
-            {!collapsed && (
-              <>
-                <span>
-                  <b>Operations Lead</b>
-                  <small>Demo Operator</small>
-                </span>
-                <MoreHorizontal size={17} />
-              </>
-            )}
-          </button>
-        </div>
-      </aside>
+          {/* TIER 2: TELEMETRY & CONTEXT SUB-BAR */}
+          <div className="nexus-sub-bar">
+            <div className="nexus-sub-left">
+              <div className="nexus-crumb">
+                <span>NEXUS</span>
+                <ChevronRight size={11} />
+                <span>Operations HQ</span>
+                <ChevronRight size={11} />
+                <b>{title}</b>
+              </div>
+            </div>
 
-      <div className="main">
-        <header className="topbar">
-          <div className="top-left">
-            <button className="icon-button mobile-menu" aria-label="Open navigation" onClick={() => setMobile(true)}>
-              <Menu size={20} />
-            </button>
-            <div className="crumb">
-              NEXUS // RETURNS <ChevronRight size={13} />
-              <b>{title}</b>
+            <div className="nexus-sub-center">
+              <div className="nexus-telemetry-badge">
+                <span className="telemetry-pulse" />
+                <span>RFC 8785 HASH CHAIN VERIFIED</span>
+              </div>
+              <span className="nexus-telemetry-sep">·</span>
+              <span className="nexus-telemetry-stat">P95 LATENCY &lt; 1.2S</span>
+              <span className="nexus-telemetry-sep">·</span>
+              <span className="nexus-telemetry-stat">DETERMINISTIC PERCEPTION</span>
+            </div>
+
+            <div className="nexus-sub-right">
+              <button className="nexus-sub-link" onClick={() => navigate('/returns')}>
+                <Package size={12} />
+                <span>Ledger ({rows.length})</span>
+              </button>
+              {queueCount > 0 && (
+                <button className="nexus-sub-link alert-link" onClick={() => navigate('/reviews')}>
+                  <ClipboardCheck size={12} />
+                  <span>Review ({queueCount})</span>
+                </button>
+              )}
+              <button className="nexus-sub-link" onClick={() => navigate(`/units/${defaultUnitId}`)}>
+                <Boxes size={12} />
+                <span>Unit Passport</span>
+              </button>
             </div>
           </div>
-          <div className="top-actions">
-            <Link
-              to="/overview"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '4px 10px',
-                borderRadius: '6px',
-                background: 'rgba(6, 182, 212, 0.12)',
-                border: '1px solid rgba(6, 182, 212, 0.35)',
-                color: '#38bdf8',
-                fontSize: '11px',
-                fontWeight: 600,
-                textDecoration: 'none',
-                letterSpacing: '0.02em',
-                transition: 'all 0.18s ease',
-              }}
-              title="Launch Futuristic Overview & Station Console"
-            >
-              <Activity size={13} style={{ color: '#06b6d4' }} />
-              <span>Overview & Console</span>
-            </Link>
 
-            <button
-              className="global-search"
-              onClick={() => {
-                setSearchQuery('')
-                setSearch(true)
-              }}
-            >
-              <Search size={15} />
-              <span>Search anything...</span>
-              <kbd>
-                <Command size={11} /> K
-              </kbd>
-            </button>
-            <button
-              className="icon-button bell-btn"
-              onClick={() => {
-                if (queueCount > 0) {
-                  navigate('/reviews')
-                  flash(`${queueCount} item${queueCount === 1 ? '' : 's'} awaiting review`)
-                } else {
-                  flash('All items reviewed · No pending alerts')
-                }
-              }}
-              aria-label="Notifications"
-              title={queueCount > 0 ? `${queueCount} items in review queue` : 'No notifications'}
-            >
-              <Bell size={18} />
-              {queueCount > 0 && <i />}
-            </button>
-            <button
-              className="theme-switch"
-              onClick={() => setDark(!dark)}
-              aria-label="Toggle theme"
-              title="Toggle dark mode"
-            >
-              <span />
-            </button>
-            <button className="top-avatar" aria-label="User account" onClick={() => navigate('/settings')}>
-              OP
-            </button>
-          </div>
-        </header>
+          {/* Mobile Navigation Drawer */}
+          {mobile && (
+            <aside className="nexus-mobile-drawer">
+              <div className="nexus-drawer-head">
+                <div className="nexus-brand-text">
+                  <strong style={{ fontFamily: "'Outfit', 'Inter', sans-serif", fontSize: '15px', fontWeight: 700 }}>
+                    NEXUS<span style={{ color: '#06b6d4' }}>//RETURNS</span>
+                  </strong>
+                </div>
+                <button className="icon-button" onClick={() => setMobile(false)}>
+                  <X size={18} />
+                </button>
+              </div>
+              <div className="nexus-drawer-links">
+                {navItems.map(({ label, path, icon: Icon, badgeKey }) => (
+                  <Link
+                    key={label}
+                    to={path}
+                    className={`nexus-drawer-link ${location.pathname === path ? 'active' : ''}`}
+                    onClick={() => setMobile(false)}
+                  >
+                    <Icon size={16} />
+                    <span>{label}</span>
+                    {badgeKey === 'queue' && queueCount > 0 && <span className="nexus-nav-badge">{queueCount}</span>}
+                  </Link>
+                ))}
+              </div>
+            </aside>
+          )}
+        </>
+      )}
 
+      {/* Panoramic Main Area */}
+      <div className="nexus-main-area">
         {inFlightJob && location.pathname !== '/returns/new' && (
           <div className="inflight-banner">
             <div className="inflight-banner-left">
