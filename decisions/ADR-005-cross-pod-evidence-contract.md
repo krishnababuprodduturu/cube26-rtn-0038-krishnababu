@@ -2,7 +2,7 @@
 
 **Status:** Accepted
 **Date:** 2026-09-25
-**Author:** upeshchowdary
+**Author:** krishnababu
 **Supersedes:** none
 **Relevant sections:** §14, §16 (build prompt)
 

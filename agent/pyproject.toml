@@ -1,7 +1,7 @@
 [project]
 name = "returns-manager"
 version = "0.1.0"
-description = "Returns Manager (Cube Buildathon 04): evidence-backed identity, completeness, condition and disposition for returned units."
+description = "Nexus Returns Manager: Multimodal visual inspection, RFC 8785 hash-chained audit trails, and Amazon condition rubrics."
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [

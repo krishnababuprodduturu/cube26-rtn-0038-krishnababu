@@ -29,7 +29,7 @@ Organiser-owned files are never modified: `.github/`, `data/`, `submissions/`, r
 
 ## Hard rules
 
-- **Repo boundary and branch:** work on branch `upeshchowdary`, never commit to `main`; one PR per phase
+- **Repo boundary and branch:** work on branch `krishnababu`, never commit to `main`; one PR per phase
   into the fork's `main`. Run `python scripts/check_boundary.py` before every push.
 - **No secrets** in git, logs or messages: `.env` is ignored; gitleaks runs in pre-commit; secrets are
   `SecretStr`. If a key leaks, revoke it; deleting the commit does not help.

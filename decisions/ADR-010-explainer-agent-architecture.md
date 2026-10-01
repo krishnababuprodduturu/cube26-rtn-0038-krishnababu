@@ -1,6 +1,6 @@
 # ADR-010 Explainer Agent architecture and evidence citation validator
 Status: accepted
-Owner: upeshchowdary
+Owner: krishnababu
 Date: 2026-09-26
 Revisit by: 2026-12-01
 Reversibility: reversible — the explainer is a read-only service that does not alter data models or database schemas

@@ -203,8 +203,10 @@ def test_t_exp_04_mcp_explain_integration(mock_evidence_doc: dict[str, Any]) -> 
     from returns_manager.config import get_settings
     from returns_manager.mcp_server import _build_mcp_server
 
-    settings = get_settings()
-    # Mock settings database_url to allow construction
+    from pydantic import SecretStr
+    settings = get_settings().model_copy(
+        update={"database_url": SecretStr("postgresql://postgres:postgres@localhost:54322/postgres")}
+    )
     mcp = _build_mcp_server(settings_override=settings)
     tool_names = [t.name for t in mcp._tool_manager.list_tools()]
     assert "explain_return_decision" in tool_names

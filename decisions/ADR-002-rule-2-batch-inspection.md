@@ -1,6 +1,6 @@
 # ADR-002 Rule-2 interpretation (single-session batched inspection)
 Status: accepted
-Owner: upeshchowdary
+Owner: krishnababu
 Date: 2026-09-25
 Revisit by: 2026-11-01
 Reversibility: irreversible — splitting inspection into per-check calls violates core engineering rules and budget limits

@@ -1,6 +1,6 @@
 # Build log · Returns Manager (Cube Buildathon 04)
 
-Owner: upeshchowdary · Branch: `upeshchowdary` (merged into `main` by PR at the end of each phase)
+Owner: krishnababu · Branch: `krishnababu` (merged into `main` by PR at the end of each phase)
 
 Every entry is dated and follows *plan / changed / failed / evidence / next*. Where a number appears, the
 method is written next to it. Sections `## Findings` and `## Open questions` are at the bottom.
@@ -87,9 +87,9 @@ method is written next to it. Sections `## Findings` and `## Open questions` are
 - **Repository layout:** the repo root of the participant's own fork, not `submissions/<user>/`
   (human's decision; see finding F-007). Organiser-owned files are never modified (see
   `scripts/check_boundary.py`).
-- **Location:** clone at `C:\Users\UPESH CHOWDARY\Desktop\cube26-rtn-0045-upeshchowdary-main\cube26-rtn-0045-upeshchowdary`,
+- **Location:** clone at `E:\cube26-rtn-0045-krishnababu\cube26-rtn-0045-krishnababu`,
   outside OneDrive (OneDrive is full, and syncing a `.venv` causes file locks).
-- **Git:** work on branch `upeshchowdary`; one PR into the fork's `main` per phase, merged after the
+- **Git:** work on branch `krishnababu`; one PR into the fork's `main` per phase, merged after the
   human approves. Repo-local `core.autocrlf=false`, `core.eol=lf`, plus `.gitattributes`, because the
   global `autocrlf=true` had checked files out as CRLF.
 - **Supabase:** local stack via Docker (`supabase start`) for P1. Hosted project later for the demo.
@@ -117,7 +117,7 @@ method is written next to it. Sections `## Findings` and `## Open questions` are
   `SecretStr`; `require(...)` → exit 5 naming only the missing variables), `errors.py` (exit codes 0–5, §20),
   and the Typer CLI `returns-manager` with the full §20 command tree. Unbuilt commands print
   "`<cmd>` is not built yet (planned for phase Pn)" and exit 1; `dev check` is real.
-- `scripts/check_boundary.py` (standard library only): branch must be `upeshchowdary` (never `main`); no
+- `scripts/check_boundary.py` (standard library only): branch must be `krishnababu` (never `main`); no
   change to organiser-owned paths; no `.env`/PDF/key files; 5 MB cap per file.
 - `.pre-commit-config.yaml`: large files (5 MB), merge conflicts, private keys, LF endings, TOML/YAML,
   ruff check + format, gitleaks, boundary check. Organiser files are excluded from every fixer.
@@ -146,12 +146,12 @@ method is written next to it. Sections `## Findings` and `## Open questions` are
 **Evidence (acceptance criteria, §23 P0)**
 - `returns-manager --help` exits 0 and lists every §20 group (`test_help_exits_zero_and_lists_command_groups`).
 - `returns-manager dev check` → ruff ok, ruff format ok, mypy ok (7 source files), pytest **33 passed**,
-  reference validate skipped (P2), boundary check ok (branch `upeshchowdary`, 26 changed files, none
+  reference validate skipped (P2), boundary check ok (branch `krishnababu`, 26 changed files, none
   organiser-owned).
 - `pre-commit run --all-files`: all 10 hooks passed, twice in a row (second run = no changes).
 - `pre-commit install` → `.git/hooks/pre-commit` installed.
 
-**Next:** commit, push `upeshchowdary`, open the P0 PR into `main`; then P1 (needs Docker Desktop running).
+**Next:** commit, push `krishnababu`, open the P0 PR into `main`; then P1 (needs Docker Desktop running).
 
 ---
 
@@ -282,7 +282,7 @@ method is written next to it. Sections `## Findings` and `## Open questions` are
 - Organisers asked about target marketplace: recorded in Open Questions OQ-2; UK guidelines marked `unverified_substitute` in all snapshots.
 - F-001 and ADR-006 written.
 
-**Next:** Commit P2, push `upeshchowdary`, and begin Phase P3 (Intake and Photo Pipeline).
+**Next:** Commit P2, push `krishnababu`, and begin Phase P3 (Intake and Photo Pipeline).
 
 ---
 
@@ -654,7 +654,7 @@ only after the human enables it within the audit-model daily budget.
   - `mypy`: ok (Success: no issues found in 109 source files)
   - `pytest (non-live)`: ok (313 passed, 0 failed)
   - `reference validate`: ok (34 files valid)
-  - `boundary check`: ok (branch 'upeshchowdary', 217 changed files, 0 organiser files touched)
+  - `boundary check`: ok (branch 'krishnababu', 217 changed files, 0 organiser files touched)
 - CLI verification: `returns-manager audit --help` and `returns-manager audit run --eval-run eval-test --dry-run` exit with code 0.
 
 **Next:** Phase 10 (Evidence records, evidence export, OpenAPI export, cross-pod contract schemas, and read-only MCP server).
@@ -743,7 +743,7 @@ just `Stop-Process` by name), the suite ran clean and fast on the very next atte
 - `pytest tests/unit/test_escalation_audit.py -q`: **10 passed, 0 failed** in 2.30 s.
 - `returns-manager dev check`: ruff lint ok, ruff format ok (135 files), mypy ok (109 source files),
   pytest **313 passed, 0 failed** in 97 s, reference validate ok (34 files), boundary check ok
-  (branch `upeshchowdary`, 217 changed files, none organiser-owned).
+  (branch `krishnababu`, 217 changed files, none organiser-owned).
 - No source change was needed; `git status`/`git diff` confirm the working tree matches `2157795` exactly.
 
 **Lesson.** When re-running this suite after killing a stuck process, kill by matched command line
@@ -751,7 +751,7 @@ just `Stop-Process` by name), the suite ran clean and fast on the very next atte
 also covers unrelated long-running MCP tooling in this environment, and a name-only kill either misses the
 stale test workers or risks taking down something unrelated.
 
-**Next:** push `2157795` (was local-only, 1 commit ahead of `origin/upeshchowdary`); then Phase 10.
+**Next:** push `2157795` (was local-only, 1 commit ahead of `origin/krishnababu`); then Phase 10.
 
 ---
 
@@ -835,7 +835,7 @@ neither of which is generated by any command and so had never been written.
 **Evidence.** After all four fixes: `ruff check` — all checks passed (145 files); `ruff
 format --check` — 145 files already formatted; `mypy` — no issues in 117 source files;
 `pytest tests/unit -m "not live"` — **346 passed** (336 prior + 8 new T-MCP + 2 new T-CON);
-`reference validate` — 34 files valid; `check_boundary.py` — branch `upeshchowdary`, 233
+`reference validate` — 34 files valid; `check_boundary.py` — branch `krishnababu`, 233
 changed files, none organiser-owned. All six `dev check` gates green for real, not "expected".
 
 **Next:** Phase 11 (Observability and economics, §18).
@@ -937,7 +937,7 @@ and `mcp_server.py` (`uvicorn.Config(..., log_config=None)` — see "failed atte
 
 - `pytest tests/unit -m "not live"`: **357 passed** (346 prior + 10 T-OBS + 1 T-SEC-09).
 - `ruff check` / `ruff format --check` / `mypy`: all clean (124 source files).
-- `reference validate`: 34 files valid. `check_boundary.py`: branch `upeshchowdary`,
+- `reference validate`: 34 files valid. `check_boundary.py`: branch `krishnababu`,
   244 changed files, none organiser-owned.
 - **Metrics return "no data" correctly**: `test_t_obs_03_summary_no_data_on_fresh_org`
   asserts every one of the 17 summary metrics renders `{"value": "no data", "n": 0}` on a
@@ -1041,7 +1041,7 @@ than silently falling back to something smaller or fabricated.
 
 - `pytest tests/unit -m "not live"`: **386 passed** (357 prior + 29 T-EVL). `ruff check` /
   `ruff format --check` / `mypy`: clean (137 source files). `reference validate`: 34
-  files. `check_boundary.py`: branch `upeshchowdary`, 258 changed files, none
+  files. `check_boundary.py`: branch `krishnababu`, 258 changed files, none
   organiser-owned. `returns-manager dev check`: all six gates green.
 - **Live, via the real CLI, not just pytest:** `returns-manager eval run --run-id
   smoke-devmini-1 --dev-mini` wrote real `manifest.json`, `metrics.json`, `report.md`
@@ -1130,7 +1130,7 @@ Build the load testing and resilience suite (§19, §20, §23):
   - `mypy`: Success: no issues found in 143 source files.
   - `pytest (non-live)`: 396 passed.
   - `reference validate`: 34 files valid.
-  - `boundary check`: branch `upeshchowdary`, 265 changed files, none organiser-owned.
+  - `boundary check`: branch `krishnababu`, 265 changed files, none organiser-owned.
 - **Live CLI smoke test:**
   - `returns-manager load-test --mode replay --units 5 --concurrency 2` ran end-to-end against local DB, generating 5 returns, processing via 2 workers, and outputting measured throughput (27.24 units/s), p50/p95/p99 latency distributions, queue wait latency, zero duplicates (0), zero drops (0), and fail-open under outage verification (PASS).
   - `returns-manager load-test --mode live --units 5 --concurrency 2` refused execution without `--confirm-spend` (exit code 4, `SpendGuardRefused`) as required by §11 spend guard.
@@ -1215,7 +1215,7 @@ Build the load testing and resilience suite (§19, §20, §23):
   - `mypy`: Success: no issues found in 152 source files.
   - `pytest (non-live)`: 408 passed.
   - `reference validate`: 34 files valid.
-  - `boundary check`: branch `upeshchowdary`, 280 changed files, none organiser-owned.
+  - `boundary check`: branch `krishnababu`, 280 changed files, none organiser-owned.
 - **ADR completeness (§27):**
   - All 10 ADRs present, properly formatted, and verified by `test_t_adr_01_all_ten_adrs_present_and_valid`.
 
@@ -1443,7 +1443,7 @@ kept at `agent/manual_test_images/batch4/`.
   - Wired `Shell` navigation, real `useBatchStore().rows` search, and review queue counts.
   - Updated `ui/.gitignore` to ignore video assets (`*.mp4`, `*.webm`) and `agent/.gitignore` to ignore runtime `.data/` directory, resolving the 5 MB boundary check (`scripts/check_boundary.py`).
 - **Evidence & Verification**:
-  - `python scripts/check_boundary.py`: ok (branch 'upeshchowdary', 0 violations).
+  - `python scripts/check_boundary.py`: ok (branch 'krishnababu', 0 violations).
   - `.\.venv\Scripts\python.exe -m ruff check .`: all checks passed.
   - `.\.venv\Scripts\python.exe -m ruff format --check .`: 197 files formatted.
   - `.\.venv\Scripts\python.exe -m mypy`: Success (no issues in 161 source files).

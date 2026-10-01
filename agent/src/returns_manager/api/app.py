@@ -74,7 +74,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                     error=str(exc),
                 )
         storage: PhotoStorage | None = None
-        if settings.supabase_url and settings.supabase_service_role_key is not None and settings.supabase_service_role_key.get_secret_value():
+        if settings.supabase_url:
             try:
                 storage = PhotoStorage(settings)
             except Exception as exc:

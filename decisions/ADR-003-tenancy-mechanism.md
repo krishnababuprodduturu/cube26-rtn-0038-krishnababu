@@ -1,6 +1,6 @@
 # ADR-003 Tenancy mechanism
 Status: accepted
-Owner: upeshchowdary
+Owner: krishnababu
 Date: 2026-09-25
 Revisit by: 2026-11-01, or if a new cross-tenant operation is needed (adding one requires a new ADR and human approval)
 Reversibility: irreversible — changing the tenancy model requires a breaking schema migration

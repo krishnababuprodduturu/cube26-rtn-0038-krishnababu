@@ -1,6 +1,6 @@
 # ADR-009 Webhooks delivery, payload structure, and HMAC signatures
 Status: accepted
-Owner: upeshchowdary
+Owner: krishnababu
 Date: 2026-09-26
 Revisit by: 2026-12-01
 Reversibility: reversible — webhook payload versioning and signature schemes are forward-compatible

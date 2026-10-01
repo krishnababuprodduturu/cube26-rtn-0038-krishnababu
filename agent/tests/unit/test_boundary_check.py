@@ -26,12 +26,12 @@ def cb() -> ModuleType:
 
 def test_clean_change_set_passes(cb: ModuleType) -> None:
     files = ["agent/src/returns_manager/config.py", "build-log.md", ".env.example", "decisions/ADR-001-x.md"]
-    assert cb.find_violations("upeshchowdary", files, {}) == []
+    assert cb.find_violations(cb.GITHUB_USERNAME, files, {}) == []
 
 
-@pytest.mark.parametrize("branch", ["main", "feature/x", "UpeshChowdary"])
+@pytest.mark.parametrize("branch", ["main", "feature/x", "KrishnaBabu"])
 def test_wrong_branch_fails(cb: ModuleType, branch: str) -> None:
-    assert cb.find_violations(branch, [], {}, "upeshchowdary")
+    assert cb.find_violations(branch, [], {}, cb.GITHUB_USERNAME)
 
 
 @pytest.mark.parametrize(
@@ -48,26 +48,26 @@ def test_wrong_branch_fails(cb: ModuleType, branch: str) -> None:
     ],
 )
 def test_organiser_paths_are_protected(cb: ModuleType, path: str) -> None:
-    v = cb.find_violations("upeshchowdary", [path], {})
+    v = cb.find_violations(cb.GITHUB_USERNAME, [path], {})
     assert any("organiser-owned" in x.reason for x in v)
 
 
 def test_nested_readme_and_gitignore_are_ours(cb: ModuleType) -> None:
-    assert cb.find_violations("upeshchowdary", ["agent/README.md", "agent/.gitignore"], {}) == []
+    assert cb.find_violations(cb.GITHUB_USERNAME, ["agent/README.md", "agent/.gitignore"], {}) == []
 
 
 @pytest.mark.parametrize(
     "path", [".env", "agent/.env", ".env.local", ".env.demo-users", "reference/guidelines.pdf", "keys/x.pem"]
 )
 def test_forbidden_files(cb: ModuleType, path: str) -> None:
-    assert any("forbidden" in x.reason for x in cb.find_violations("upeshchowdary", [path], {}))
+    assert any("forbidden" in x.reason for x in cb.find_violations(cb.GITHUB_USERNAME, [path], {}))
 
 
 def test_env_example_is_allowed(cb: ModuleType) -> None:
-    assert cb.find_violations("upeshchowdary", [".env.example"], {}) == []
+    assert cb.find_violations(cb.GITHUB_USERNAME, [".env.example"], {}) == []
 
 
 def test_size_cap(cb: ModuleType) -> None:
     big = 5 * 1024 * 1024 + 1
-    v = cb.find_violations("upeshchowdary", ["fixtures/units/U/1.jpg"], {"fixtures/units/U/1.jpg": big})
+    v = cb.find_violations(cb.GITHUB_USERNAME, ["fixtures/units/U/1.jpg"], {"fixtures/units/U/1.jpg": big})
     assert any("5 MB" in x.reason for x in v)

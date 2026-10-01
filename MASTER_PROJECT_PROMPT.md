@@ -1,9 +1,9 @@
 # CUBE26 RETURNS MANAGER (RTN-0045) — MASTER PROJECT DOSSIER & COMPREHENSIVE PROMPT
-**Author:** Upesh Chowdary  
+**Author:** Krishna Babu  
 **Track:** Cube26 Buildathon Round 2 — Track RTN-0045  
 **Project:** Returns Manager — *"Turn every returned package into a documented, auditable decision."*  
-**Date of Completion:** September 29, 2026  
-**Repository Branch:** `upeshchowdary`  
+**Date of Completion:** October 1, 2026  
+**Repository Branch:** `krishnababu`  
 **Test Suite Status:** 127 / 127 Passing (100% Green, 0 Flaws)
 
 ---
@@ -208,7 +208,7 @@ graph TD
 | **5** | **Cross-Tenant Data Leak in Audit Chain Routes** | In P10, event chain read queries fetched events by `unit_id` without filtering by `org_id` in SQL WHERE clauses. | Added strict `org_id` equality checks on all chain head lookups and reinforced Supabase RLS policies. |
 | **6** | **All Uploaded Returns Stuck in "Pending Review / Uncertain"** | Initial batch test runs returned uniform "uncertain" results because: (a) Gemini free-tier key hit 429 quota limits, triggering the fail-open fallback; (b) batch processor lacked multi-modal image URL fetching. | Injected fresh working Gemini API key, added asynchronous image downloading directly from image URLs, and tuned the multimodal prompt to analyze pre-sale vs post-return image deltas. |
 | **7** | **Duplicate Product Rows on Returns Console** | Re-uploading CSV batches created duplicate return items because items lacked distinct idempotency keys. | Added `product_id` and `return_id` deduplication checks in the batch runner, and built a "Clear Cache" button in Settings. |
-| **8** | **Downloaded Output File Was Corrupted / Not CSV** | Frontend downloaded raw in-memory JSON payloads using a `.csv` extension instead of converting rows to standard comma-delimited text. | Rewrote export generator in [jobs_service.py](file:///c:/Users/UPESH%20CHOWDARY/OneDrive/Desktop/cube26-rtn-0045-upeshchowdary-main/cube26-rtn-0045-upeshchowdary/agent/src/returns_manager/batch/jobs_service.py) using Python's native `csv.writer` with RFC 4180 escaping and `text/csv` MIME headers. |
+| **8** | **Downloaded Output File Was Corrupted / Not CSV** | Frontend downloaded raw in-memory JSON payloads using a `.csv` extension instead of converting rows to standard comma-delimited text. | Rewrote export generator in [jobs_service.py](agent/src/returns_manager/batch/jobs_service.py) using Python's native `csv.writer` with RFC 4180 escaping and `text/csv` MIME headers. |
 | **9** | **Batch Processing Halting on Tab Navigation** | The inspection process was tied to the `Inspection.tsx` React component lifecycle; switching to Dashboard unmounted the component and canceled the request. | Elevated batch state to global application level with background worker polling, decoupling job execution from UI view unmounting. |
 | **10** | **UI Frame Drops & Scrolling Stuttering** | Complex SVG background gradients and unoptimized backdrop blur filters caused frame rates to drop below 30 FPS on high-refresh monitors. | Optimized CSS with `will-change: transform`, GPU hardware acceleration (`transform: translateZ(0)`), and streamlined CSS animations to sustain 60–120 FPS. |
 | **11** | **Absence of "Refurbish" Dispositions in Early Runs** | Synthetic test data contained binary extremes (brand new unopened vs destroyed items); routing rule R09/R10 required specific combinations of intact components and minor wear. | Expanded test dataset and calibrated confidence grading to recognize intermediate wear (packaging tears, minor surface scuffs) suitable for refurbishment. |
@@ -311,7 +311,7 @@ You are an expert principal software engineer and reverse-logistics domain speci
 ## 8. Repository File Directory Index
 
 ```
-cube26-rtn-0045-upeshchowdary/
+cube26-rtn-0045-krishnababu/
 ├── agent/                                # Backend Python Application
 │   ├── src/returns_manager/
 │   │   ├── api/                          # FastAPI REST Endpoints & OpenAPI

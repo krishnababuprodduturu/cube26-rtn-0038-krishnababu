@@ -1,6 +1,6 @@
 # ADR-006 Rubric source substitute and data-driven marketplace adaptation
 Status: accepted
-Owner: upeshchowdary
+Owner: krishnababu
 Date: 2026-09-25
 Revisit by: 2026-10-01, or immediately upon organizer guidance regarding target marketplace documentation
 Reversibility: reversible — switching rubric snapshot source is a pure configuration/data change

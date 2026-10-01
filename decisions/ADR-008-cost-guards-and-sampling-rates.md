@@ -1,6 +1,6 @@
 # ADR-008 Cost guards, quota management, and sampling rates
 Status: accepted
-Owner: upeshchowdary
+Owner: krishnababu
 Date: 2026-09-25
 Revisit by: 2026-11-01
 Reversibility: reversible — parameters can be adjusted via environment configuration

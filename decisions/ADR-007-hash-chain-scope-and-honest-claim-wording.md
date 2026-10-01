@@ -1,6 +1,6 @@
 # ADR-007 Hash-chain scope and honest claim wording
 Status: accepted
-Owner: upeshchowdary
+Owner: krishnababu
 Date: 2026-09-25
 Revisit by: 2026-11-01, or if an external blockchain or timestamping witness is integrated
 Reversibility: reversible

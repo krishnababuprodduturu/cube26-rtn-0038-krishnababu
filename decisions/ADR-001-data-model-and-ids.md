@@ -1,6 +1,6 @@
 # ADR-001 Data model and identifiers
 Status: accepted
-Owner: upeshchowdary
+Owner: krishnababu
 Date: 2026-09-25
 Revisit by: 2026-11-01
 Reversibility: irreversible — changing ID schemes or primary key types requires database and schema migrations

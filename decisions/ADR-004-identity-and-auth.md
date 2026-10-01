@@ -1,6 +1,6 @@
 # ADR-004 Identity and authentication
 Status: accepted
-Owner: upeshchowdary
+Owner: krishnababu
 Date: 2026-09-25
 Revisit by: 2026-12-01, or if the JWT signing algorithm changes on hosted Supabase
 Reversibility: reversible — auth can be replaced without changing the data model
