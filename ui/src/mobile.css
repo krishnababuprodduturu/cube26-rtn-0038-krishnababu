@@ -1,0 +1,603 @@
+/* ==========================================================================
+   CUBE Returns Manager — Mobile & Touch Ergonomics
+   Senior Design Engineering: Native Mobile Adaptation for Smartphones & Tablets.
+   Implements physical touch targets, safe area insets, responsive grids,
+   off-canvas navigation drawer, and overflow prevention across all screens.
+   ========================================================================== */
+
+/* ── 1. Global Platform Touch & Viewport Foundations ───────────────────── */
+html {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overscroll-behavior-y: none;
+}
+
+/* Prevent iOS Safari from zooming into form controls on focus */
+input,
+textarea,
+select {
+  font-size: 16px !important;
+}
+
+/* Instant press response & control text unselectable */
+button,
+a,
+[role="button"],
+.tab,
+.chip,
+.badge-btn {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Clear press state for touch screens */
+@media (hover: none) and (pointer: coarse) {
+  .button:active,
+  .nav-link:active,
+  .attention-item-row:active {
+    transform: scale(0.98);
+    opacity: 0.88;
+  }
+}
+
+/* ── 2. Desktop Defaults (> 960px) ─────────────────────────────────────── */
+@media (min-width: 961px) {
+  .mobile-menu {
+    display: none !important;
+  }
+  .mobile-close-btn {
+    display: none !important;
+  }
+  .scrim {
+    display: none !important;
+  }
+}
+
+/* ── 3. Tablet & Mobile Responsive Breakpoints (<= 960px) ──────────────── */
+@media (max-width: 960px) {
+  /* Hamburger Menu Button */
+  .mobile-menu {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: var(--rm-radius-md, 6px) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid var(--rm-border, rgba(255, 255, 255, 0.08)) !important;
+    color: var(--rm-text-primary, #f0f4f2) !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+    margin-right: 6px;
+    transition: background 0.15s ease, border-color 0.15s ease;
+  }
+
+  .mobile-menu:active {
+    background: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* Off-canvas Navigation Drawer */
+  .dashboard-shell .sidebar,
+  .shell .sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    width: 284px !important;
+    max-width: 86vw !important;
+    height: 100dvh !important;
+    z-index: 1000 !important;
+    transform: translateX(-100%) !important;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease !important;
+    box-shadow: none !important;
+    background: #0b0f0d !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-top: calc(16px + env(safe-area-inset-top, 0px)) !important;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .dashboard-shell .sidebar.mobile-open,
+  .shell .sidebar.mobile-open {
+    transform: translateX(0) !important;
+    box-shadow: 10px 0 50px rgba(0, 0, 0, 0.85) !important;
+  }
+
+  /* Backdrop Scrim */
+  .scrim {
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(0, 0, 0, 0.72) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    z-index: 999 !important;
+    border: none !important;
+    outline: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    animation: scrimFadeIn 0.2s ease forwards;
+  }
+
+  @keyframes scrimFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .collapse-btn {
+    display: none !important;
+  }
+
+  .mobile-close-btn {
+    display: inline-grid !important;
+    place-items: center !important;
+    margin-left: auto !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: var(--rm-radius-md, 6px) !important;
+    background: transparent !important;
+    border: none !important;
+    color: var(--rm-text-secondary, #8c9c92) !important;
+    cursor: pointer !important;
+  }
+
+  .mobile-close-btn:active {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: var(--rm-text-primary, #f0f4f2) !important;
+  }
+
+  /* Main Viewport Container */
+  .dashboard-shell .main,
+  .shell .main {
+    width: 100% !important;
+    min-width: 0 !important;
+    flex: 1 !important;
+  }
+
+  /* Topbar Header */
+  .dashboard-shell .topbar,
+  .topbar {
+    padding: 0 14px !important;
+    height: calc(54px + env(safe-area-inset-top, 0px)) !important;
+    padding-top: env(safe-area-inset-top, 0px) !important;
+    box-sizing: border-box !important;
+  }
+
+  .top-left {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-width: 0 !important;
+    flex: 1 !important;
+  }
+
+  /* Page Padding for Mobile */
+  .dashboard-shell .page,
+  .page {
+    padding: 16px 14px calc(48px + env(safe-area-inset-bottom, 0px)) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Inflight Notification Banner */
+  .inflight-banner {
+    margin: 12px 14px 0 !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+  }
+
+  .inflight-banner-right {
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  .inflight-banner-right .button {
+    flex: 1 1 auto !important;
+    justify-content: center !important;
+  }
+
+  /* Dashboard Grid & Charts */
+  .dashboard-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  /* Inspection Grid Stack */
+  .inspection-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .inspection-grid > aside.decision {
+    grid-column: span 1 !important;
+  }
+
+  /* Settings Page */
+  .settings-layout {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .settings-layout nav {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 6px !important;
+    padding-bottom: 6px !important;
+  }
+
+  .settings-layout nav button {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+/* ── 4. Compact Smartphone Breakpoints (<= 640px) ──────────────────────── */
+@media (max-width: 640px) {
+  /* Topbar breadcrumb trimming */
+  .crumb > span:not(:last-child),
+  .crumb > svg:not(:last-of-type) {
+    display: none !important;
+  }
+
+  .crumb b {
+    font-size: 13px !important;
+    max-width: 150px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* Search button compacted to icon-only */
+  .dashboard-shell .global-search span,
+  .dashboard-shell .global-search kbd {
+    display: none !important;
+  }
+
+  .dashboard-shell .global-search {
+    width: 34px !important;
+    height: 34px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: none !important;
+  }
+
+  .theme-switch {
+    display: none !important;
+  }
+
+  /* Page Header & Actions */
+  .page-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .header-actions {
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  .header-actions .button {
+    flex: 1 1 auto !important;
+    justify-content: center !important;
+    height: 36px !important;
+  }
+
+  /* Metrics KPI Grid: 2 columns on phones */
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .metric-tile {
+    min-height: 84px !important;
+    padding: 10px 12px !important;
+  }
+
+  .metric-value {
+    font-size: 20px !important;
+  }
+
+  .metric-note {
+    font-size: 10px !important;
+  }
+
+  /* Donut Disposition Visualizer */
+  .donut-wrap {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 16px !important;
+    padding: 14px !important;
+    text-align: center !important;
+  }
+
+  .disposition-legend-list {
+    width: 100% !important;
+  }
+
+  /* Policy & Governance Assurance Strip */
+  .governance-strip {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    padding: 12px !important;
+  }
+
+  .gov-left {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+
+  .gov-tags {
+    gap: 6px !important;
+  }
+
+  /* Attention Queue Rows */
+  .attention-item-row {
+    padding: 10px 12px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+
+  .attention-meta {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+
+  .row-arrow {
+    display: none !important;
+  }
+
+  /* Tables & Ledger Mobile Horizontal Scroll */
+  .table-responsive,
+  .table-wrap,
+  .panel > table,
+  table {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    box-sizing: border-box !important;
+  }
+
+  table {
+    min-width: 580px !important;
+  }
+
+  /* Return Table Filters & Toolbars */
+  .return-toolbar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    padding: 12px !important;
+  }
+
+  .tabs {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    width: 100% !important;
+    padding-bottom: 2px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .tab {
+    flex-shrink: 0 !important;
+  }
+
+  .table-tools {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+
+  .table-search {
+    flex: 1 !important;
+    width: 100% !important;
+  }
+
+  .table-search input {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .table-footer {
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: flex-start !important;
+    padding: 10px 12px !important;
+  }
+
+  /* Inspection Workbench Controls */
+  .inspection-top {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .inspection-buttons {
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  .inspection-buttons .button {
+    flex: 1 1 auto !important;
+    justify-content: center !important;
+  }
+
+  .photo-comparison-grid,
+  .evidence-grid,
+  .photo-stage-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .evidence-panel {
+    padding: 12px !important;
+  }
+
+  /* Dialogs & Overlays */
+  .command-overlay,
+  .overlay {
+    padding: 12px !important;
+    box-sizing: border-box !important;
+  }
+
+  .command-dialog,
+  .connect-dialog,
+  .upload-dialog,
+  .dialog {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    max-height: calc(100dvh - 24px) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .dialog-actions {
+    flex-direction: column-reverse !important;
+    gap: 8px !important;
+  }
+
+  .dialog-actions .button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  .wizard-footer {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+  }
+
+  .wizard-footer .button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* ── 5. Cinematic Overview Experience (Mobile Pacing) ──────────────────── */
+@media (max-width: 768px) {
+  .cinematic-nav {
+    height: 54px !important;
+    padding: 0 14px !important;
+  }
+
+  .cinematic-nav nav {
+    display: none !important;
+  }
+
+  .cinematic-hero-copy {
+    padding: 0 16px !important;
+    text-align: center !important;
+  }
+
+  .cinematic-hero-copy h1 {
+    font-size: clamp(20px, 6.5vw, 30px) !important;
+    line-height: 1.18 !important;
+  }
+
+  .cinematic-hero-copy p {
+    font-size: 13px !important;
+  }
+
+  .cinematic-scene {
+    width: 92vw !important;
+    max-width: 440px !important;
+    height: auto !important;
+    aspect-ratio: 16/9 !important;
+  }
+
+  .scene-readout {
+    font-size: 9.5px !important;
+    padding: 3px 7px !important;
+  }
+
+  .cinematic-rail {
+    display: none !important;
+  }
+
+  .cinematic-story-stack {
+    padding: 0 14px !important;
+    width: 100% !important;
+  }
+
+  .cinematic-story-card {
+    padding: 16px 14px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .cinematic-dossier-section {
+    padding: 40px 14px 60px !important;
+  }
+
+  .dossier-header h2 {
+    font-size: 24px !important;
+  }
+
+  .dossier-pipeline-grid,
+  .dossier-pillars-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .dossier-table-wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .dossier-table {
+    min-width: 540px !important;
+  }
+
+  .dossier-cta-banner {
+    padding: 20px 14px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+
+  .dossier-cta-actions {
+    width: 100% !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  .dossier-cta-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* ── 6. Ultra-compact Displays (<= 380px) ──────────────────────────────── */
+@media (max-width: 380px) {
+  .metrics-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
