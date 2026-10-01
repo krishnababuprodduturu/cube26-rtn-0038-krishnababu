@@ -77,10 +77,31 @@ async def assert_safe_role(conn: AsyncConnection[Any]) -> str:
     return str(info["rolname"])
 
 
+def clean_conninfo(uri: str) -> str:
+    """Normalize and URL-encode password if it contains '@' which breaks URI parsing."""
+    if not (uri.startswith("postgres://") or uri.startswith("postgresql://")):
+        return uri
+    try:
+        import urllib.parse
+
+        scheme, rest = uri.split("://", 1)
+        if "@" not in rest:
+            return uri
+        userinfo, hostdb = rest.rsplit("@", 1)
+        if ":" in userinfo:
+            user, pwd = userinfo.split(":", 1)
+            pwd_quoted = urllib.parse.quote(urllib.parse.unquote(pwd), safe="")
+            return f"{scheme}://{user}:{pwd_quoted}@{hostdb}"
+    except Exception:
+        pass
+    return uri
+
+
 class Database:
     """Owns the pool. All transactions go through `transaction(org_id)` (see db.tenant)."""
 
     def __init__(self, conninfo: str, *, min_size: int = 1, max_size: int = 10) -> None:
+        conninfo = clean_conninfo(conninfo)
         self._pool: AsyncConnectionPool[AsyncConnection[Any]] = AsyncConnectionPool(
             conninfo,
             min_size=min_size,

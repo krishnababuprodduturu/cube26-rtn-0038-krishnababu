@@ -62,8 +62,28 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                     "Database connection offline; starting in standalone batch mode.",
                     error=str(exc),
                 )
-        jwt = JwtVerifier(settings) if (settings.supabase_jwks_url or settings.supabase_jwt_secret) else None
-        storage = PhotoStorage(settings) if settings.supabase_url else None
+        jwt: JwtVerifier | None = None
+        if settings.supabase_jwks_url or settings.supabase_jwt_secret or settings.supabase_url:
+            try:
+                jwt = JwtVerifier(settings)
+            except Exception as exc:
+                import structlog
+
+                structlog.get_logger().warning(
+                    "JWT verifier offline; proceeding without auth verification",
+                    error=str(exc),
+                )
+        storage: PhotoStorage | None = None
+        if settings.supabase_url and settings.supabase_service_role_key is not None and settings.supabase_service_role_key.get_secret_value():
+            try:
+                storage = PhotoStorage(settings)
+            except Exception as exc:
+                import structlog
+
+                structlog.get_logger().warning(
+                    "Photo storage offline; proceeding without Supabase storage",
+                    error=str(exc),
+                )
         if settings.gemini_api_key is not None:
             from returns_manager.llm.gemini_client import GeminiModelClient
 

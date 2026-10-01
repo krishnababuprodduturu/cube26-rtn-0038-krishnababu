@@ -29,9 +29,12 @@ class VerifiedToken:
 
 class JwtVerifier:
     def __init__(self, settings: Settings) -> None:
-        if not settings.supabase_jwt_issuer:
+        issuer = settings.supabase_jwt_issuer
+        if not issuer and settings.supabase_url:
+            issuer = f"{settings.supabase_url.rstrip('/')}/auth/v1"
+        if not issuer:
             raise ConfigError("Missing required configuration: SUPABASE_JWT_ISSUER")
-        self._issuer = settings.supabase_jwt_issuer
+        self._issuer = issuer
         self._audience = settings.supabase_jwt_audience
         self._jwks: jwt.PyJWKClient | None = None
         self._secret: str | None = None
@@ -39,6 +42,11 @@ class JwtVerifier:
             self._jwks = jwt.PyJWKClient(
                 settings.supabase_jwks_url, cache_keys=True, lifespan=300, timeout=10
             )
+        elif settings.supabase_url and (
+            settings.supabase_jwt_secret is None or not settings.supabase_jwt_secret.get_secret_value()
+        ):
+            jwks_url = f"{settings.supabase_url.rstrip('/')}/auth/v1/.well-known/jwks.json"
+            self._jwks = jwt.PyJWKClient(jwks_url, cache_keys=True, lifespan=300, timeout=10)
         if settings.supabase_jwt_secret is not None and settings.supabase_jwt_secret.get_secret_value():
             self._secret = settings.supabase_jwt_secret.get_secret_value()
         if self._jwks is None and self._secret is None:
