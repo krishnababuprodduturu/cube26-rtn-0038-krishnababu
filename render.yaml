@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: cube26-returns-manager
+    name: cube26-rtn-0045-krishnababu
     runtime: docker
     plan: free
     region: oregon
