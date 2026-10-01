@@ -123,24 +123,23 @@ export default function CinematicOverview() {
 
   return (
     <div className="apex-auth-viewport">
-      {/* Ambient Cyber Orange Background */}
+      {/* Ambient Futuristic Glow Background */}
       <div className="apex-auth-bg" />
       <div className="apex-auth-grid" />
 
       {/* Top Header Navigation */}
       <header className="apex-auth-nav">
         <div className="apex-auth-brand">
-          <div className="apex-brand-icon">
-            <span className="apex-brand-cube">
-              <i></i>
-              <i></i>
-              <i></i>
-              <i></i>
-            </span>
+          <div className="apex-brand-icon" style={{ background: 'rgba(6, 182, 212, 0.12)', border: '1px solid rgba(6, 182, 212, 0.35)', borderRadius: '10px' }}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2L21 7V17L12 22L3 17V7L12 2Z" stroke="#06b6d4" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12 6L18 9.5V14.5L12 18L6 14.5V9.5L12 6Z" fill="rgba(6, 182, 212, 0.2)" stroke="#3b82f6" strokeWidth="1.2"/>
+              <circle cx="12" cy="12" r="2.5" fill="#06b6d4"/>
+            </svg>
           </div>
           <div className="apex-brand-text">
-            <div className="apex-brand-title">RETURN MANAGER</div>
-            <span className="apex-brand-badge">APEX OS</span>
+            <div className="apex-brand-title">NEXUS<span>//RETURNS</span></div>
+            <span className="apex-brand-badge" style={{ background: 'rgba(6, 182, 212, 0.18)', color: '#38bdf8', borderColor: 'rgba(6, 182, 212, 0.35)' }}>VISION OS 2.4</span>
           </div>
         </div>
 
@@ -171,8 +170,8 @@ export default function CinematicOverview() {
               className="apex-btn-header"
               onClick={handleInstantDemo}
             >
-              <Sparkles size={13} style={{ color: '#ffaa33' }} />
-              <span>Demo Quick-Launch</span>
+              <Sparkles size={13} style={{ color: '#06b6d4' }} />
+              <span>Instant Demo Access</span>
             </button>
           )}
         </div>
@@ -446,9 +445,9 @@ export default function CinematicOverview() {
       {/* Bottom Legal & Node Telemetry Footer */}
       <footer className="apex-auth-footer">
         <div className="apex-footer-left">
-          <span>RETURN MANAGER APEX v2.4.0</span>
+          <span>NEXUS // RETURNS v2.4.0</span>
           <span className="apex-footer-sep">/</span>
-          <span>AUTONOMOUS LOGISTICS OS</span>
+          <span>AUTONOMOUS VISION LOGISTICS PLATFORM</span>
         </div>
         <div className="apex-footer-right">
           <span className="apex-footer-spec">Deterministic State Machine • Canonical JSON SHA-256</span>

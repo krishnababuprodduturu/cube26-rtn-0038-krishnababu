@@ -6,40 +6,40 @@
 
 /* ── 1. Core Tokens & Neutral Base ──────────────────────────────────────── */
 :root {
-  --rm-canvas: #09090c;
-  --rm-surface: #101217;
-  --rm-surface-elevated: #161922;
-  --rm-surface-hover: #1c212c;
+  --rm-canvas: #080b12;
+  --rm-surface: #0e1422;
+  --rm-surface-elevated: #141c2e;
+  --rm-surface-hover: #1a253c;
   
   --rm-border: rgba(255, 255, 255, 0.08);
   --rm-border-subtle: rgba(255, 255, 255, 0.05);
-  --rm-border-hover: rgba(255, 107, 0, 0.35);
-  --rm-border-focus: #ff6b00;
+  --rm-border-hover: rgba(6, 182, 212, 0.4);
+  --rm-border-focus: #06b6d4;
 
   --rm-text-primary: #f8fafc;
-  --rm-text-secondary: #8e9bb0;
-  --rm-text-muted: #58667a;
+  --rm-text-secondary: #94a3b8;
+  --rm-text-muted: #64748b;
 
-  --rm-emerald: #ff6b00;
-  --rm-emerald-hover: #ff7d1a;
-  --rm-emerald-dim: rgba(255, 107, 0, 0.14);
-  --rm-emerald-border: rgba(255, 107, 0, 0.35);
+  --rm-emerald: #06b6d4;
+  --rm-emerald-hover: #0891b2;
+  --rm-emerald-dim: rgba(6, 182, 212, 0.14);
+  --rm-emerald-border: rgba(6, 182, 212, 0.35);
 
-  --rm-amber: #ffaa00;
-  --rm-amber-dim: rgba(255, 170, 0, 0.14);
-  --rm-amber-border: rgba(255, 170, 0, 0.35);
+  --rm-amber: #f59e0b;
+  --rm-amber-dim: rgba(245, 158, 11, 0.14);
+  --rm-amber-border: rgba(245, 158, 11, 0.35);
 
-  --rm-red: #ff3366;
-  --rm-red-dim: rgba(255, 51, 102, 0.14);
-  --rm-red-border: rgba(255, 51, 102, 0.35);
+  --rm-red: #f43f5e;
+  --rm-red-dim: rgba(244, 63, 94, 0.14);
+  --rm-red-border: rgba(244, 63, 94, 0.35);
 
-  --rm-blue: #00d2ff;
-  --rm-blue-dim: rgba(0, 210, 255, 0.14);
-  --rm-blue-border: rgba(0, 210, 255, 0.35);
+  --rm-blue: #3b82f6;
+  --rm-blue-dim: rgba(59, 130, 246, 0.14);
+  --rm-blue-border: rgba(59, 130, 246, 0.35);
 
-  --rm-violet: #a855f7;
-  --rm-violet-dim: rgba(168, 85, 247, 0.14);
-  --rm-violet-border: rgba(168, 85, 247, 0.35);
+  --rm-violet: #8b5cf6;
+  --rm-violet-dim: rgba(139, 92, 246, 0.14);
+  --rm-violet-border: rgba(139, 92, 246, 0.35);
 
   --rm-radius-sm: 5px;
   --rm-radius-md: 8px;
@@ -111,6 +111,15 @@
   margin-left: 4px;
 }
 
+.dashboard-shell .nexus-mark {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.45));
+}
+
 .dashboard-shell .cube-mark {
   width: 22px;
   height: 22px;
@@ -118,18 +127,18 @@
   grid-template-columns: 1fr 1fr;
   gap: 2.5px;
   transform: none;
-  filter: drop-shadow(0 0 8px rgba(255, 107, 0, 0.55));
+  filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.55));
 }
 
 .dashboard-shell .cube-mark i {
-  background: #ff6b00;
+  background: #06b6d4;
   border-radius: 2px;
-  box-shadow: 0 0 6px rgba(255, 107, 0, 0.45);
+  box-shadow: 0 0 6px rgba(6, 182, 212, 0.45);
 }
 
-.dashboard-shell .cube-mark i:nth-child(2) { background: #ffaa00; }
-.dashboard-shell .cube-mark i:nth-child(3) { background: #ff4500; }
-.dashboard-shell .cube-mark i:nth-child(4) { background: #ffd000; }
+.dashboard-shell .cube-mark i:nth-child(2) { background: #3b82f6; }
+.dashboard-shell .cube-mark i:nth-child(3) { background: #0891b2; }
+.dashboard-shell .cube-mark i:nth-child(4) { background: #8b5cf6; }
 
 .dashboard-shell .workspace {
   height: 44px;
@@ -1195,10 +1204,10 @@
 }
 
 .tab.selected {
-  background: rgba(255, 107, 0, 0.14);
-  color: #ffaa00;
+  background: rgba(6, 182, 212, 0.14);
+  color: #06b6d4;
   font-weight: 600;
-  border-color: rgba(255, 107, 0, 0.35);
+  border-color: rgba(6, 182, 212, 0.35);
 }
 
 .tab small {

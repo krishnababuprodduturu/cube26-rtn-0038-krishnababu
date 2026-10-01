@@ -170,31 +170,32 @@ function Shell({ children }: { children: ReactNode }) {
             to="/overview"
             style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: 'inherit' }}
           >
-            <span className="cube-mark">
-              <i />
-              <i />
-              <i />
-              <i />
+            <span className="nexus-mark">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2L21 7V17L12 22L3 17V7L12 2Z" stroke="#06b6d4" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 6L18 9.5V14.5L12 18L6 14.5V9.5L12 6Z" fill="rgba(6, 182, 212, 0.18)" stroke="#3b82f6" strokeWidth="1.2"/>
+                <circle cx="12" cy="12" r="2.5" fill="#06b6d4"/>
+              </svg>
             </span>
             {!collapsed && (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <strong>
-                  RETURN<span>MANAGER</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+                <strong style={{ fontFamily: "'Outfit', 'Inter', sans-serif", fontSize: '15px', fontWeight: 700, letterSpacing: '0.04em' }}>
+                  NEXUS<span style={{ color: '#06b6d4' }}>//RETURNS</span>
                 </strong>
                 <span
                   style={{
                     fontSize: '9px',
                     fontWeight: 700,
-                    fontFamily: '"DM Mono", monospace',
-                    padding: '2px 5px',
+                    fontFamily: '"JetBrains Mono", monospace',
+                    padding: '2px 6px',
                     borderRadius: '4px',
-                    background: 'rgba(255, 107, 0, 0.18)',
-                    color: '#ff6b00',
-                    border: '1px solid rgba(255, 107, 0, 0.35)',
+                    background: 'rgba(6, 182, 212, 0.16)',
+                    color: '#38bdf8',
+                    border: '1px solid rgba(6, 182, 212, 0.35)',
                     letterSpacing: '0.08em',
                   }}
                 >
-                  APEX
+                  AI v2.4
                 </span>
               </div>
             )}
@@ -216,12 +217,14 @@ function Shell({ children }: { children: ReactNode }) {
         </div>
 
         <button className="workspace" onClick={() => navigate('/dashboard')}>
-          <span className="workspace-logo">RM</span>
+          <span className="workspace-logo" style={{ background: 'linear-gradient(135deg, #06b6d4, #3b82f6)', color: '#fff', fontWeight: 800 }}>
+            NX
+          </span>
           {!collapsed && (
             <>
               <span>
                 <b>Operations HQ</b>
-                <small>Vision Inspection Hub</small>
+                <small>Autonomous Vision Node</small>
               </span>
               <ChevronDown size={14} />
             </>
@@ -295,7 +298,7 @@ function Shell({ children }: { children: ReactNode }) {
               <Menu size={20} />
             </button>
             <div className="crumb">
-              RETURN MANAGER <ChevronRight size={13} />
+              NEXUS // RETURNS <ChevronRight size={13} />
               <b>{title}</b>
             </div>
           </div>
@@ -308,19 +311,19 @@ function Shell({ children }: { children: ReactNode }) {
                 gap: '6px',
                 padding: '4px 10px',
                 borderRadius: '6px',
-                background: 'rgba(255, 107, 0, 0.12)',
-                border: '1px solid rgba(255, 107, 0, 0.35)',
-                color: '#ff8533',
+                background: 'rgba(6, 182, 212, 0.12)',
+                border: '1px solid rgba(6, 182, 212, 0.35)',
+                color: '#38bdf8',
                 fontSize: '11px',
                 fontWeight: 600,
                 textDecoration: 'none',
                 letterSpacing: '0.02em',
                 transition: 'all 0.18s ease',
               }}
-              title="Launch Cinematic Neural HUD Tour"
+              title="Launch Futuristic Overview & Station Console"
             >
-              <Activity size={13} style={{ color: '#ff6b00' }} />
-              <span>Cinematic Tour</span>
+              <Activity size={13} style={{ color: '#06b6d4' }} />
+              <span>Overview & Console</span>
             </Link>
 
             <button
@@ -403,7 +406,7 @@ function Shell({ children }: { children: ReactNode }) {
         {justCompletedJob && location.pathname !== '/returns/new' && (
           <div className="inflight-banner completed">
             <div className="inflight-banner-left">
-              <CheckCircle2 size={16} style={{ color: '#ffaa00', flexShrink: 0 }} />
+              <CheckCircle2 size={16} style={{ color: '#10b981', flexShrink: 0 }} />
               <span>
                 <strong>Batch inspection completed:</strong>{' '}
                 {justCompletedJob.total_rows} returns evaluated successfully.

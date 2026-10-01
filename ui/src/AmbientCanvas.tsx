@@ -34,23 +34,23 @@ export default function AmbientCanvas({
 
       ctx.clearRect(0, 0, width, height)
 
-      // 1. Subtle top-center ambient gradient (Cyber Orange & Warm Amber)
+      // 1. Subtle top-center ambient gradient (Electric Cyan & Deep Indigo)
       const topGrad = ctx.createRadialGradient(
         width * 0.5, 0, 0,
         width * 0.5, 0, Math.max(width * 0.6, 600)
       )
-      topGrad.addColorStop(0, `rgba(255, 107, 0, ${0.08 * intensity})`)
-      topGrad.addColorStop(0.45, `rgba(255, 170, 0, ${0.035 * intensity})`)
+      topGrad.addColorStop(0, `rgba(6, 182, 212, ${0.09 * intensity})`)
+      topGrad.addColorStop(0.35, `rgba(59, 130, 246, ${0.045 * intensity})`)
       topGrad.addColorStop(1, 'transparent')
       ctx.fillStyle = topGrad
       ctx.fillRect(0, 0, width, height)
 
-      // 2. Subtle bottom-right ambient accent (Warm Sunset Amber)
+      // 2. Subtle bottom-right ambient accent (Deep Royal Violet)
       const botGrad = ctx.createRadialGradient(
         width * 0.85, height * 0.9, 0,
-        width * 0.85, height * 0.9, 500
+        width * 0.85, height * 0.9, 550
       )
-      botGrad.addColorStop(0, `rgba(255, 120, 0, ${0.05 * intensity})`)
+      botGrad.addColorStop(0, `rgba(99, 102, 241, ${0.06 * intensity})`)
       botGrad.addColorStop(1, 'transparent')
       ctx.fillStyle = botGrad
       ctx.fillRect(0, 0, width, height)

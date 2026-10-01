@@ -235,9 +235,9 @@ export default function Inspection() {
                     borderRadius: 6,
                     cursor: 'pointer',
                     fontWeight: 600,
-                    background: isComparing ? 'rgba(255, 107, 0, 0.18)' : 'rgba(255, 255, 255, 0.05)',
-                    border: isComparing ? '1px solid #ff6b00' : '1px solid rgba(255, 255, 255, 0.12)',
-                    color: isComparing ? '#ffaa00' : '#aaa',
+                    background: isComparing ? 'rgba(6, 182, 212, 0.18)' : 'rgba(255, 255, 255, 0.05)',
+                    border: isComparing ? '1px solid #06b6d4' : '1px solid rgba(255, 255, 255, 0.12)',
+                    color: isComparing ? '#38bdf8' : '#aaa',
                   }}
                 >
                   ⚖️ Side-by-Side Compare
@@ -364,7 +364,7 @@ export default function Inspection() {
                     className={viewMode === 'compare' ? 'chosen' : ''}
                     onClick={() => setViewMode('compare')}
                     title="Side-by-side before vs after comparison"
-                    style={{ borderColor: viewMode === 'compare' ? '#ff6b00' : undefined }}
+                    style={{ borderColor: viewMode === 'compare' ? '#06b6d4' : undefined }}
                   >
                     <span style={{ fontSize: '9px', fontWeight: 700, padding: '2px 4px' }}>SPLIT</span>
                   </button>
@@ -434,7 +434,7 @@ export default function Inspection() {
                     className={viewMode === 'compare' ? 'chosen' : ''}
                     onClick={() => setViewMode('compare')}
                     title="Switch to side-by-side comparison"
-                    style={{ borderColor: viewMode === 'compare' ? '#ff6b00' : undefined }}
+                    style={{ borderColor: viewMode === 'compare' ? '#06b6d4' : undefined }}
                   >
                     <span style={{ fontSize: '9px', fontWeight: 700, padding: '2px 4px' }}>SPLIT</span>
                   </button>

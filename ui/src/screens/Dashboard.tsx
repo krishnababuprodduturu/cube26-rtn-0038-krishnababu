@@ -23,16 +23,16 @@ import { Button, Header, Metric, Note } from './shared'
 
 const CHART_TOOLTIP = {
   contentStyle: {
-    backgroundColor: '#101217',
-    border: '1px solid rgba(255, 107, 0, 0.35)',
+    backgroundColor: '#0c101a',
+    border: '1px solid rgba(6, 182, 212, 0.35)',
     borderRadius: 8,
     fontSize: 12,
-    color: '#f3f6f9',
-    boxShadow: '0 12px 32px rgba(0, 0, 0, 0.7)',
+    color: '#f8fafc',
+    boxShadow: '0 12px 32px rgba(0, 0, 0, 0.75)',
     padding: '10px 14px',
   },
-  itemStyle: { color: '#ff6b00', fontSize: 11.5, fontWeight: 600 },
-  labelStyle: { color: '#8e9bb0', fontWeight: 600, fontSize: 11, marginBottom: 4 },
+  itemStyle: { color: '#38bdf8', fontSize: 11.5, fontWeight: 600 },
+  labelStyle: { color: '#94a3b8', fontWeight: 600, fontSize: 11, marginBottom: 4 },
 } as const
 
 const containerVariants: Variants = {
@@ -128,27 +128,27 @@ export default function Dashboard() {
             flexWrap: 'wrap',
             gap: '12px',
             padding: '10px 16px',
-            background: 'rgba(16, 18, 23, 0.75)',
-            border: '1px solid rgba(255, 107, 0, 0.22)',
+            background: 'rgba(12, 16, 26, 0.75)',
+            border: '1px solid rgba(6, 182, 212, 0.25)',
             borderRadius: '10px',
             marginBottom: '16px',
             backdropFilter: 'blur(12px)',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', fontFamily: '"DM Mono", monospace' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', fontFamily: '"JetBrains Mono", monospace' }}>
             <span
               style={{
                 width: '8px',
                 height: '8px',
                 borderRadius: '50%',
-                background: '#ff6b00',
-                boxShadow: '0 0 10px #ff6b00',
+                background: '#10b981',
+                boxShadow: '0 0 10px rgba(16, 185, 129, 0.7)',
                 display: 'inline-block',
               }}
             />
-            <strong style={{ color: '#fff', letterSpacing: '0.5px' }}>APEX VISION ENGINE</strong>
+            <strong style={{ color: '#fff', letterSpacing: '0.5px' }}>NEXUS VISION CORE</strong>
             <span style={{ color: 'var(--rm-text-muted)' }}>·</span>
-            <span style={{ color: '#ffaa00' }}>RFC 8785 AUDIT CHAIN VERIFIED</span>
+            <span style={{ color: '#38bdf8' }}>RFC 8785 AUDIT CHAIN VERIFIED</span>
             <span style={{ color: 'var(--rm-text-muted)' }}>·</span>
             <span style={{ color: 'var(--rm-text-secondary)' }}>INSPECTION LATENCY &lt; 1.2s</span>
           </div>
@@ -156,9 +156,9 @@ export default function Dashboard() {
             <button
               onClick={() => navigate('/returns')}
               style={{
-                background: 'rgba(255, 107, 0, 0.12)',
-                border: '1px solid rgba(255, 107, 0, 0.35)',
-                color: '#ff9944',
+                background: 'rgba(6, 182, 212, 0.12)',
+                border: '1px solid rgba(6, 182, 212, 0.35)',
+                color: '#22d3ee',
                 padding: '4px 10px',
                 borderRadius: '6px',
                 fontSize: '11px',
@@ -279,12 +279,12 @@ export default function Dashboard() {
                 <AreaChart data={activity} margin={{ top: 12, right: 10, left: -24, bottom: 0 }}>
                   <defs>
                     <linearGradient id="processedGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#ff6b00" stopOpacity={0.25} />
-                      <stop offset="100%" stopColor="#ff6b00" stopOpacity={0.01} />
+                      <stop offset="0%" stopColor="#06b6d4" stopOpacity={0.25} />
+                      <stop offset="100%" stopColor="#06b6d4" stopOpacity={0.01} />
                     </linearGradient>
                     <linearGradient id="uncertainGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#ffaa00" stopOpacity={0.2} />
-                      <stop offset="100%" stopColor="#ffaa00" stopOpacity={0.01} />
+                      <stop offset="0%" stopColor="#f59e0b" stopOpacity={0.2} />
+                      <stop offset="100%" stopColor="#f59e0b" stopOpacity={0.01} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid vertical={false} stroke="rgba(255, 255, 255, 0.05)" strokeDasharray="3 3" />
@@ -295,19 +295,19 @@ export default function Dashboard() {
                     type="monotone"
                     dataKey="processed"
                     name="Processed"
-                    stroke="#ff6b00"
+                    stroke="#06b6d4"
                     strokeWidth={2}
                     fill="url(#processedGradient)"
-                    dot={{ fill: '#ff6b00', r: 3.5, stroke: '#101217', strokeWidth: 2 }}
+                    dot={{ fill: '#06b6d4', r: 3.5, stroke: '#0c101a', strokeWidth: 2 }}
                   />
                   <Area
                     type="monotone"
                     dataKey="uncertain"
                     name="Uncertain"
-                    stroke="#ffaa00"
+                    stroke="#f59e0b"
                     strokeWidth={1.8}
                     fill="url(#uncertainGradient)"
-                    dot={{ fill: '#ffaa00', r: 3, stroke: '#101217', strokeWidth: 2 }}
+                    dot={{ fill: '#f59e0b', r: 3, stroke: '#0c101a', strokeWidth: 2 }}
                   />
                 </AreaChart>
               </ResponsiveContainer>
