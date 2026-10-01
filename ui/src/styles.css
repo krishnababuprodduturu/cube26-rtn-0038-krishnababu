@@ -2,27 +2,27 @@
    Design Tokens & Shell Base — Titanium Dark & Cyber Emerald
    ========================================================================== */
 :root {
-  --ink: #f8fafc;
-  --muted: #94a3b8;
-  --line: rgba(255, 255, 255, 0.09);
-  --line-highlight: rgba(6, 182, 212, 0.45);
-  --paper: #0c101a;
-  --paper-elevated: #121826;
-  --canvas: #07090e;
-  --orange: #06b6d4;
-  --orange-glow: 0 0 22px rgba(6, 182, 212, 0.45);
-  --teal: #06b6d4;
-  --teal-glow: 0 0 20px rgba(6, 182, 212, 0.45);
-  --teal-dark: #0891b2;
-  --soft-green: rgba(16, 185, 129, 0.14);
+  --ink: #ffffff;
+  --muted: #a1a1aa;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-highlight: rgba(255, 255, 255, 0.45);
+  --paper: #0a0a0a;
+  --paper-elevated: #141414;
+  --canvas: #000000;
+  --orange: #ffffff;
+  --orange-glow: 0 0 22px rgba(255, 255, 255, 0.25);
+  --teal: #ffffff;
+  --teal-glow: 0 0 20px rgba(255, 255, 255, 0.25);
+  --teal-dark: #e4e4e7;
+  --soft-green: rgba(255, 255, 255, 0.1);
   --amber: #f59e0b;
   --soft-amber: rgba(245, 158, 11, 0.14);
   --red: #f43f5e;
   --soft-red: rgba(244, 63, 94, 0.14);
-  --blue: #3b82f6;
-  --soft-blue: rgba(59, 130, 246, 0.14);
-  --violet: #8b5cf6;
-  --shadow: 0 12px 36px rgba(0, 0, 0, 0.7);
+  --blue: #ffffff;
+  --soft-blue: rgba(255, 255, 255, 0.1);
+  --violet: #d4d4d8;
+  --shadow: 0 12px 36px rgba(0, 0, 0, 0.85);
 }
 
 .shell {
@@ -37,7 +37,7 @@
 
 .overview-shell {
   display: block;
-  background: #06080d;
+  background: #000000;
 }
 
 .overview-shell .sidebar,
@@ -58,14 +58,14 @@
 }
 
 .shell.dark {
-  --paper: #0c101a;
-  --paper-elevated: #121826;
-  --canvas: #07090e;
-  --ink: #f8fafc;
-  --muted: #94a3b8;
-  --line: rgba(255, 255, 255, 0.09);
-  --soft-green: rgba(16, 185, 129, 0.14);
-  --shadow: 0 12px 36px rgba(0, 0, 0, 0.7);
+  --paper: #0a0a0a;
+  --paper-elevated: #141414;
+  --canvas: #000000;
+  --ink: #ffffff;
+  --muted: #a1a1aa;
+  --line: rgba(255, 255, 255, 0.1);
+  --soft-green: rgba(255, 255, 255, 0.1);
+  --shadow: 0 12px 36px rgba(0, 0, 0, 0.85);
 }
 
 /* ==========================================================================
@@ -76,7 +76,7 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(8, 11, 18, 0.92);
+  background: rgba(5, 5, 5, 0.94);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -114,9 +114,9 @@
   font-family: 'DM Mono', monospace;
   padding: 2px 6px;
   border-radius: 4px;
-  background: rgba(6, 182, 212, 0.16);
-  color: #38bdf8;
-  border: 1px solid rgba(6, 182, 212, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   letter-spacing: 0.06em;
 }
 
@@ -136,8 +136,8 @@
 
 .nexus-workspace-pill:hover {
   background: rgba(255, 255, 255, 0.08);
-  color: #f8fafc;
-  border-color: rgba(6, 182, 212, 0.3);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .nexus-ws-dot {
@@ -190,22 +190,23 @@
 }
 
 .nexus-nav-tab.active {
-  background: rgba(6, 182, 212, 0.14);
-  color: #06b6d4;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
   font-weight: 600;
-  border: 1px solid rgba(6, 182, 212, 0.32);
-  box-shadow: inset 0 0 12px rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.06);
 }
 
 .nexus-nav-tab-cta {
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.18), rgba(59, 130, 246, 0.12));
-  border: 1px solid rgba(6, 182, 212, 0.35);
-  color: #22d3ee;
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  color: #000000;
+  font-weight: 600;
 }
 
 .nexus-nav-tab-cta:hover {
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.28), rgba(59, 130, 246, 0.22));
-  color: #ffffff;
+  background: #e4e4e7;
+  color: #000000;
 }
 
 .nexus-nav-badge {
@@ -243,8 +244,8 @@
 
 .nexus-search-trigger:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(6, 182, 212, 0.3);
-  color: #f8fafc;
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
 }
 
 .nexus-search-trigger kbd {
@@ -253,7 +254,7 @@
   padding: 1px 4px;
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.08);
-  color: #64748b;
+  color: #a1a1aa;
   display: flex;
   align-items: center;
   gap: 2px;
@@ -266,9 +267,9 @@
   gap: 6px;
   padding: 0 10px;
   border-radius: 7px;
-  background: rgba(6, 182, 212, 0.12);
-  border: 1px solid rgba(6, 182, 212, 0.35);
-  color: #38bdf8;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
   font-size: 11px;
   font-weight: 600;
   text-decoration: none;
@@ -277,9 +278,9 @@
 }
 
 .nexus-console-btn:hover {
-  background: rgba(6, 182, 212, 0.22);
-  color: #ffffff;
-  box-shadow: 0 0 14px rgba(6, 182, 212, 0.25);
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.25);
 }
 
 .nexus-tool-btn {
@@ -326,15 +327,15 @@
 
 .nexus-profile-pill:hover {
   background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(6, 182, 212, 0.35);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .nexus-avatar-circ {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #06b6d4, #3b82f6);
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
   font-size: 9px;
   font-weight: 700;
   display: grid;
@@ -362,7 +363,7 @@
 /* Tier 2: Sub-Command Strip */
 .nexus-sub-bar {
   height: 38px;
-  background: rgba(10, 14, 22, 0.92);
+  background: rgba(8, 8, 8, 0.95);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
@@ -375,12 +376,12 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: #64748b;
+  color: #71717a;
   font-size: 10.5px;
 }
 
 .nexus-crumb b {
-  color: #f8fafc;
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -396,7 +397,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  color: #06b6d4;
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -404,8 +405,8 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #06b6d4;
-  box-shadow: 0 0 6px #06b6d4;
+  background: #ffffff;
+  box-shadow: 0 0 6px #ffffff;
 }
 
 .nexus-telemetry-sep {
@@ -470,7 +471,7 @@
   right: 0;
   bottom: 0;
   width: 280px;
-  background: rgba(12, 16, 26, 0.98);
+  background: rgba(8, 8, 8, 0.98);
   backdrop-filter: blur(24px);
   border-left: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 100;
@@ -509,8 +510,8 @@
 
 .nexus-drawer-link:hover,
 .nexus-drawer-link.active {
-  background: rgba(6, 182, 212, 0.15);
-  color: #06b6d4;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }
 
 @media (max-width: 1080px) {
@@ -535,9 +536,9 @@
   gap: 24px;
   padding: 26px 30px;
   border-radius: 16px;
-  background: linear-gradient(135deg, rgba(14, 20, 34, 0.9) 0%, rgba(8, 11, 18, 0.95) 100%);
-  border: 1px solid rgba(6, 182, 212, 0.22);
-  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(18, 18, 18, 0.9) 0%, rgba(8, 8, 8, 0.95) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   margin-bottom: 24px;
   position: relative;
   overflow: hidden;
@@ -551,7 +552,7 @@
   width: 250px;
   height: 250px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -571,9 +572,9 @@
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: #06b6d4;
-  background: rgba(6, 182, 212, 0.08);
-  border: 1px solid rgba(6, 182, 212, 0.25);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 3px 9px;
   border-radius: 4px;
   width: fit-content;
@@ -609,7 +610,7 @@
 }
 
 .nexus-hero-telemetry-row .highlight {
-  color: #38bdf8;
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -625,24 +626,25 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  background: linear-gradient(135deg, #06b6d4 0%, #0284c7 100%);
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
   font-family: inherit;
   font-weight: 600;
   font-size: 12.5px;
   padding: 8px 16px;
   border-radius: 8px;
-  border: none;
+  border: 1px solid #ffffff;
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(6, 182, 212, 0.35);
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
 }
 
 .nexus-btn-primary:hover {
-  background: linear-gradient(135deg, #22d3ee 0%, #0369a1 100%);
+  background: #e4e4e7;
+  color: #000000;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.45);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.35);
 }
 
 .nexus-btn-warning {
@@ -701,7 +703,7 @@
 }
 
 .bento-card {
-  background: rgba(14, 20, 34, 0.72);
+  background: rgba(14, 14, 14, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 14px;
   padding: 20px 22px;
@@ -717,15 +719,15 @@
 }
 
 .bento-card:hover {
-  border-color: rgba(6, 182, 212, 0.35);
+  border-color: rgba(255, 255, 255, 0.35);
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.65);
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
 .bento-card.wide-card {
   grid-column: span 2;
-  background: linear-gradient(135deg, rgba(14, 20, 34, 0.85) 0%, rgba(18, 26, 44, 0.75) 100%);
-  border-color: rgba(6, 182, 212, 0.2);
+  background: linear-gradient(135deg, rgba(18, 18, 18, 0.85) 0%, rgba(12, 12, 12, 0.75) 100%);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .bento-card-top {
@@ -744,9 +746,9 @@
 }
 
 .bento-icon-wrap.cyan {
-  background: rgba(6, 182, 212, 0.12);
-  color: #06b6d4;
-  border: 1px solid rgba(6, 182, 212, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .bento-icon-wrap.emerald {
@@ -875,13 +877,13 @@
 
 .brand strong span {
   font-weight: 600;
-  color: #06b6d4;
+  color: #ffffff;
   margin-left: 5px;
   font-size: 11px;
   padding: 1px 6px;
   border-radius: 4px;
-  background: rgba(6, 182, 212, 0.12);
-  border: 1px solid rgba(6, 182, 212, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   vertical-align: middle;
 }
 
@@ -893,26 +895,26 @@
   gap: 2.5px;
   transform: rotate(0deg);
   flex: none;
-  filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.45));
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
 }
 
 .cube-mark i {
-  background: #06b6d4;
+  background: #ffffff;
   border-radius: 3px;
-  box-shadow: 0 0 8px rgba(6, 182, 212, 0.4);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
 }
 
 .cube-mark i:nth-child(2) {
-  background: #3b82f6;
-  box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+  background: #d4d4d8;
+  box-shadow: none;
 }
 
 .cube-mark i:nth-child(3) {
-  background: #0ea5e9;
+  background: #a1a1aa;
 }
 
 .cube-mark i:nth-child(4) {
-  background: #10b981;
+  background: #71717a;
 }
 
 .icon-button {
@@ -1967,8 +1969,8 @@
 }
 
 .tab.selected {
-  color: #06b6d4;
-  border-bottom-color: #06b6d4;
+  color: #ffffff;
+  border-bottom-color: #ffffff;
   font-weight: 600
 }
 
@@ -4608,8 +4610,8 @@ td>small {
 }
 
 .dashboard-shell .workspace-logo {
-  background: rgba(6, 182, 212, 0.16);
-  color: #06b6d4;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }
 
 .dashboard-shell .nav-link {
@@ -4622,10 +4624,10 @@ td>small {
 }
 
 .dashboard-shell .nav-link.active {
-  background: rgba(6, 182, 212, 0.14);
-  color: #06b6d4;
-  box-shadow: inset 0 0 16px rgba(6, 182, 212, 0.16), 0 2px 8px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(6, 182, 212, 0.35);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
 .dashboard-shell .system-health,
@@ -4642,10 +4644,10 @@ td>small {
 .dashboard-shell .table-search,
 .dashboard-shell .select,
 .dashboard-shell .button {
-  background: rgba(12, 16, 26, 0.85);
+  background: rgba(14, 14, 14, 0.9);
   backdrop-filter: blur(12px);
   border-color: rgba(255, 255, 255, 0.1);
-  color: #f8fafc
+  color: #ffffff
 }
 
 .dashboard-shell .global-search,
@@ -4655,26 +4657,27 @@ td>small {
 
 .dashboard-shell .global-search input,
 .dashboard-shell .table-search input {
-  color: #f8fafc
+  color: #ffffff
 }
 
 .dashboard-shell .button:hover:not(:disabled) {
-  background: rgba(6, 182, 212, 0.16);
-  border-color: rgba(6, 182, 212, 0.4);
-  box-shadow: 0 0 14px rgba(6, 182, 212, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.1);
 }
 
 .dashboard-shell .button.primary {
-  background: linear-gradient(135deg, #06b6d4, #0284c7);
-  border-color: #06b6d4;
-  color: #ffffff;
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #000000;
   font-weight: 700;
-  box-shadow: 0 4px 18px rgba(6, 182, 212, 0.35);
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.2);
 }
 
 .dashboard-shell .button.primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #22d3ee, #06b6d4);
-  box-shadow: 0 6px 24px rgba(6, 182, 212, 0.5);
+  background: #e4e4e7;
+  border-color: #e4e4e7;
+  box-shadow: 0 6px 24px rgba(255, 255, 255, 0.35);
 }
 
 .dashboard-shell .panel,
@@ -5680,8 +5683,8 @@ td>small {
 .cinematic-stage-grid {
   position: absolute;
   inset: 0;
-  opacity: 0.2;
-  background-image: linear-gradient(#06b6d415 1px, transparent 1px), linear-gradient(90deg, #06b6d415 1px, transparent 1px);
+  opacity: 0.15;
+  background-image: linear-gradient(#ffffff15 1px, transparent 1px), linear-gradient(90deg, #ffffff15 1px, transparent 1px);
   background-size: 55px 55px;
   mask-image: linear-gradient(90deg, transparent, #000 38%, #000 82%, transparent);
 }
@@ -5702,7 +5705,7 @@ td>small {
 }
 
 .cinematic-stage-inner .cinematic-hero-copy h1 em {
-  color: #06b6d4;
+  color: #ffffff;
   letter-spacing: -3px;
 }
 
@@ -5715,7 +5718,7 @@ td>small {
 
 .cinematic-eyebrow {
   display: block;
-  color: #06b6d4;
+  color: #ffffff;
   font: 9px 'DM Mono', monospace;
   letter-spacing: 1.9px;
 }
@@ -6022,10 +6025,10 @@ td>small {
 
 .hud-btn-group button.active,
 .hud-toggle-btn.active {
-  background: rgba(6, 182, 212, 0.2);
-  border-color: #06b6d4;
-  color: #22d3ee;
-  box-shadow: inset 0 0 12px rgba(6, 182, 212, 0.25);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
 }
 
 .hud-progress-item {
@@ -6055,7 +6058,7 @@ td>small {
 
 .hud-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #06b6d4, #3b82f6);
+  background: #ffffff;
   border-radius: 3px;
   transition: width 0.3s;
 }
@@ -6187,18 +6190,18 @@ td>small {
 }
 
 .rail-node.rail-current .rail-marker {
-  border-color: #06b6d4;
-  background: rgba(6, 182, 212, 0.25);
-  box-shadow: 0 0 12px rgba(6, 182, 212, 0.5), inset 0 0 6px rgba(6, 182, 212, 0.3);
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.4), inset 0 0 6px rgba(255, 255, 255, 0.2);
 }
 
 .rail-node.rail-current .rail-marker i {
-  background: #06b6d4;
+  background: #ffffff;
   transform: scale(1.4);
 }
 
 .rail-node.rail-current .rail-name {
-  color: #06b6d4;
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -6207,9 +6210,9 @@ td>small {
 }
 
 .rail-node.rail-done .rail-marker {
-  border-color: rgba(6, 182, 212, 0.5);
-  background: rgba(6, 182, 212, 0.15);
-  color: #06b6d4;
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
 }
 
 /* Technical Decision Badges & Micro-Metadata */
@@ -6251,14 +6254,14 @@ td>small {
 }
 
 .badge-refund {
-  background: rgba(6, 182, 212, 0.16);
-  border: 1px solid rgba(6, 182, 212, 0.45);
-  color: #22d3ee;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
 }
 
 .badge-refund .badge-dot {
-  background: #06b6d4;
-  box-shadow: 0 0 6px #06b6d4;
+  background: #ffffff;
+  box-shadow: 0 0 6px #ffffff;
 }
 
 .badge-reject {
@@ -6294,14 +6297,14 @@ td>small {
   padding: 3px 8px;
   border-radius: 3px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(6, 182, 212, 0.25);
-  color: #06b6d4;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
   font: 8px 'DM Mono', monospace;
   letter-spacing: 0.8px;
 }
 
 .story-meta-pill svg {
-  color: #06b6d4;
+  color: #ffffff;
 }
 
 .cinematic-progress {
@@ -6326,7 +6329,7 @@ td>small {
   display: block;
   width: 0;
   height: 2px;
-  background: #06b6d4;
+  background: #ffffff;
 }
 
 .cinematic-debug {
@@ -6343,7 +6346,7 @@ td>small {
 }
 
 .cinematic-debug span {
-  color: #06b6d4;
+  color: #ffffff;
 }
 
 .scene-index {
@@ -6381,7 +6384,7 @@ td>small {
 }
 
 .scroll-cue svg {
-  color: #06b6d4;
+  color: #ffffff;
   animation: cue-nudge 1.8s ease-in-out infinite;
 }
 
@@ -6493,9 +6496,9 @@ td>small {
   font-family: 'Newsreader', Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  color: #06b6d4;
+  color: #ffffff;
   letter-spacing: -2.4px;
-  text-shadow: 0 0 35px rgba(6, 182, 212, 0.45);
+  text-shadow: 0 0 35px rgba(255, 255, 255, 0.4);
 }
 
 .final-subtext {
@@ -6531,19 +6534,19 @@ td>small {
 }
 
 .final-btn-primary {
-  background: rgba(6, 182, 212, 0.18);
-  border: 1px solid rgba(6, 182, 212, 0.55);
-  color: #ffffff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), inset 0 0 16px rgba(6, 182, 212, 0.15);
+  background: #ffffff;
+  border: 1px solid #ffffff;
+  color: #000000;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(14px);
 }
 
 .final-btn-primary:hover {
   transform: translateY(-2px);
-  border-color: #22d3ee;
-  background: #06b6d4;
-  box-shadow: 0 12px 32px rgba(6, 182, 212, 0.4), inset 0 0 20px rgba(100, 220, 255, 0.3);
-  color: #ffffff;
+  border-color: #e4e4e7;
+  background: #e4e4e7;
+  box-shadow: 0 12px 32px rgba(255, 255, 255, 0.35);
+  color: #000000;
 }
 
 .final-btn-primary:active {
@@ -6615,7 +6618,7 @@ td>small {
 }
 
 .signature-pipeline span:hover {
-  color: #06b6d4;
+  color: #ffffff;
 }
 
 .signature-pipeline i {
@@ -7941,8 +7944,8 @@ td>small {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background: #08090d;
-  color: #e5e8ec;
+  background: #000000;
+  color: #ffffff;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   position: relative;
   user-select: none;
@@ -7953,10 +7956,10 @@ td>small {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 18% 25%, rgba(6, 182, 212, 0.14) 0%, transparent 45%),
-    radial-gradient(circle at 82% 70%, rgba(99, 102, 241, 0.11) 0%, transparent 40%),
-    radial-gradient(ellipse at 50% 100%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-    linear-gradient(180deg, #06080d 0%, #0a0e17 100%);
+    radial-gradient(circle at 18% 25%, rgba(255, 255, 255, 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 82% 70%, rgba(255, 255, 255, 0.03) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 100%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+    linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
   z-index: 0;
 }
 
@@ -7964,8 +7967,8 @@ td>small {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(to right, rgba(6, 182, 212, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(6, 182, 212, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 32px 32px;
   mask-image: radial-gradient(ellipse at 50% 50%, black 45%, transparent 80%);
   pointer-events: none;
@@ -7980,8 +7983,8 @@ td>small {
   align-items: center;
   justify-content: space-between;
   padding: 0 clamp(20px, 3.5vw, 48px);
-  border-bottom: 1px solid rgba(6, 182, 212, 0.16);
-  background: rgba(8, 11, 18, 0.88);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(5, 5, 5, 0.94);
   backdrop-filter: blur(16px);
   z-index: 10;
 }
@@ -8015,7 +8018,8 @@ td>small {
 }
 
 .apex-brand-title span {
-  color: #06b6d4;
+  color: #ffffff;
+  opacity: 0.85;
 }
 
 .apex-brand-badge {
@@ -8023,9 +8027,9 @@ td>small {
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.6px;
-  color: #38bdf8;
-  background: rgba(6, 182, 212, 0.16);
-  border: 1px solid rgba(6, 182, 212, 0.35);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   padding: 1px 6px;
   border-radius: 4px;
 }
@@ -8034,8 +8038,8 @@ td>small {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(14, 20, 32, 0.85);
-  border: 1px solid rgba(6, 182, 212, 0.24);
+  background: rgba(18, 18, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 4px 12px;
   border-radius: 100px;
   font-size: 11px;
@@ -8052,7 +8056,7 @@ td>small {
 }
 
 .apex-status-sub {
-  color: #38bdf8;
+  color: #e4e4e7;
   font-weight: 500;
 }
 
@@ -8074,9 +8078,9 @@ td>small {
 }
 
 .apex-btn-header {
-  border: 1px solid rgba(6, 182, 212, 0.35);
-  background: rgba(6, 182, 212, 0.1);
-  color: #38bdf8;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
   padding: 6px 14px;
   border-radius: 7px;
   font-size: 11px;
@@ -8090,10 +8094,10 @@ td>small {
 }
 
 .apex-btn-header:hover {
-  background: rgba(6, 182, 212, 0.2);
-  border-color: rgba(6, 182, 212, 0.6);
-  color: #ffffff;
-  box-shadow: 0 0 14px rgba(6, 182, 212, 0.3);
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #000000;
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.25);
 }
 
 /* Main Area */
@@ -8131,9 +8135,9 @@ td>small {
   font-size: 10px;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 600;
-  color: #38bdf8;
-  background: rgba(6, 182, 212, 0.12);
-  border: 1px solid rgba(6, 182, 212, 0.28);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   letter-spacing: 0.5px;
   margin-bottom: 10px;
   width: fit-content;
@@ -8150,7 +8154,7 @@ td>small {
 }
 
 .apex-auth-title span {
-  background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #d4d4d8 50%, #a1a1aa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -8172,18 +8176,18 @@ td>small {
 }
 
 .apex-auth-card {
-  background: rgba(14, 20, 32, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(14, 14, 14, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 9px;
   padding: 11px 13px;
   transition: all 0.2s ease;
 }
 
 .apex-auth-card:hover {
-  border-color: rgba(6, 182, 212, 0.4);
-  background: rgba(20, 28, 45, 0.9);
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(24, 24, 24, 0.95);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.12);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
 }
 
 .apex-auth-card-head {
@@ -8200,9 +8204,9 @@ td>small {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(6, 182, 212, 0.12);
-  color: #06b6d4;
-  border: 1px solid rgba(6, 182, 212, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   flex-shrink: 0;
 }
 
@@ -8225,8 +8229,8 @@ td>small {
   align-items: center;
   justify-content: space-between;
   padding: 8px 14px;
-  background: rgba(12, 16, 26, 0.65);
-  border: 1px solid rgba(6, 182, 212, 0.18);
+  background: rgba(10, 10, 10, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
   max-width: 540px;
 }
@@ -8240,7 +8244,7 @@ td>small {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12.5px;
   font-weight: 700;
-  color: #38bdf8;
+  color: #ffffff;
 }
 
 .apex-auth-telemetry-lbl {
@@ -8265,9 +8269,9 @@ td>small {
 .apex-signin-box {
   width: 100%;
   max-width: 440px;
-  background: rgba(12, 17, 28, 0.9);
-  border: 1px solid rgba(6, 182, 212, 0.3);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.75), 0 0 35px rgba(6, 182, 212, 0.12);
+  background: rgba(10, 10, 10, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(22px);
   border-radius: 14px;
   padding: 24px;
@@ -8288,12 +8292,12 @@ td>small {
   width: 36px;
   height: 36px;
   border-radius: 9px;
-  background: linear-gradient(135deg, rgba(6, 182, 212, 0.25), rgba(59, 130, 246, 0.15));
-  border: 1px solid rgba(6, 182, 212, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #38bdf8;
+  color: #ffffff;
   flex-shrink: 0;
 }
 
@@ -8313,8 +8317,8 @@ td>small {
 
 /* Active Session Detected Card */
 .apex-session-active-card {
-  background: rgba(6, 182, 212, 0.08);
-  border: 1px solid rgba(6, 182, 212, 0.25);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 9px;
   padding: 14px;
   margin-bottom: 14px;
@@ -8341,7 +8345,7 @@ td>small {
 .apex-session-active-key {
   font-size: 11px;
   font-family: 'JetBrains Mono', monospace;
-  color: #38bdf8;
+  color: #ffffff;
 }
 
 .apex-session-actions {
@@ -8387,17 +8391,17 @@ td>small {
 
 .apex-field-hint {
   font-size: 9.5px;
-  color: #38bdf8;
+  color: #a1a1aa;
   font-weight: normal;
 }
 
 .apex-role-chips {
   display: flex;
   gap: 5px;
-  background: rgba(9, 12, 19, 0.7);
+  background: rgba(18, 18, 18, 0.8);
   padding: 3px;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .apex-role-chip {
@@ -8425,15 +8429,15 @@ td>small {
 }
 
 .apex-role-chip.active {
-  background: rgba(6, 182, 212, 0.18);
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
   font-weight: 600;
-  border: 1px solid rgba(6, 182, 212, 0.4);
-  box-shadow: 0 2px 8px rgba(6, 182, 212, 0.2);
+  border: 1px solid #ffffff;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
 }
 
 .apex-role-chip.active .apex-role-chip-badge {
-  color: #38bdf8;
+  color: #000000;
 }
 
 .apex-role-desc {
@@ -8456,8 +8460,8 @@ td>small {
 
 .apex-signin-input {
   width: 100%;
-  background: rgba(9, 12, 20, 0.92);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(18, 18, 18, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   padding: 9px 30px 9px 12px;
   font-size: 12px;
@@ -8468,8 +8472,8 @@ td>small {
 }
 
 .apex-signin-input:focus {
-  border-color: #06b6d4;
-  box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.25);
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
 }
 
 .apex-input-reset-btn {
@@ -8511,9 +8515,9 @@ td>small {
 
 .apex-btn-primary {
   width: 100%;
-  background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
-  color: #ffffff;
-  border: 1px solid rgba(56, 189, 248, 0.4);
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid #ffffff;
   padding: 10px 14px;
   border-radius: 8px;
   font-size: 12.5px;
@@ -8523,14 +8527,15 @@ td>small {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  box-shadow: 0 4px 16px rgba(6, 182, 212, 0.35);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.2);
   transition: all 0.2s ease;
 }
 
 .apex-btn-primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #0891b2 0%, #1d4ed8 100%);
+  background: #e4e4e7;
+  border-color: #e4e4e7;
   transform: translateY(-1px);
-  box-shadow: 0 6px 22px rgba(6, 182, 212, 0.5);
+  box-shadow: 0 6px 22px rgba(255, 255, 255, 0.3);
 }
 
 .apex-btn-primary:disabled {
@@ -8540,9 +8545,9 @@ td>small {
 
 .apex-btn-secondary {
   width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  color: #cbd5e1;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   padding: 9px 14px;
   border-radius: 8px;
   font-size: 11.5px;
@@ -8556,9 +8561,9 @@ td>small {
 }
 
 .apex-btn-secondary:hover {
-  background: rgba(6, 182, 212, 0.1);
-  border-color: rgba(6, 182, 212, 0.35);
-  color: #38bdf8;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #ffffff;
 }
 
 .apex-signin-footer-note {

@@ -23,16 +23,16 @@ import { Button, Note } from './shared'
 
 const CHART_TOOLTIP = {
   contentStyle: {
-    backgroundColor: '#0c101a',
-    border: '1px solid rgba(6, 182, 212, 0.35)',
+    backgroundColor: '#0a0a0a',
+    border: '1px solid rgba(255, 255, 255, 0.25)',
     borderRadius: 8,
     fontSize: 12,
-    color: '#f8fafc',
-    boxShadow: '0 12px 32px rgba(0, 0, 0, 0.75)',
+    color: '#ffffff',
+    boxShadow: '0 12px 32px rgba(0, 0, 0, 0.85)',
     padding: '10px 14px',
   },
-  itemStyle: { color: '#38bdf8', fontSize: 11.5, fontWeight: 600 },
-  labelStyle: { color: '#94a3b8', fontWeight: 600, fontSize: 11, marginBottom: 4 },
+  itemStyle: { color: '#ffffff', fontSize: 11.5, fontWeight: 600 },
+  labelStyle: { color: '#a1a1aa', fontWeight: 600, fontSize: 11, marginBottom: 4 },
 } as const
 
 const containerVariants: Variants = {
@@ -311,8 +311,8 @@ export default function Dashboard() {
                 <AreaChart data={activity} margin={{ top: 12, right: 10, left: -24, bottom: 0 }}>
                   <defs>
                     <linearGradient id="processedGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#06b6d4" stopOpacity={0.25} />
-                      <stop offset="100%" stopColor="#06b6d4" stopOpacity={0.01} />
+                      <stop offset="0%" stopColor="#ffffff" stopOpacity={0.25} />
+                      <stop offset="100%" stopColor="#ffffff" stopOpacity={0.01} />
                     </linearGradient>
                     <linearGradient id="uncertainGradient" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="0%" stopColor="#f59e0b" stopOpacity={0.2} />
@@ -327,10 +327,10 @@ export default function Dashboard() {
                     type="monotone"
                     dataKey="processed"
                     name="Processed"
-                    stroke="#06b6d4"
+                    stroke="#ffffff"
                     strokeWidth={2}
                     fill="url(#processedGradient)"
-                    dot={{ fill: '#06b6d4', r: 3.5, stroke: '#0c101a', strokeWidth: 2 }}
+                    dot={{ fill: '#ffffff', r: 3.5, stroke: '#000000', strokeWidth: 2 }}
                   />
                   <Area
                     type="monotone"

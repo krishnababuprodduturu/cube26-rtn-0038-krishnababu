@@ -159,16 +159,16 @@ function Shell({ children }: { children: ReactNode }) {
               <Link to="/overview" className="nexus-brand-link">
                 <span className="nexus-mark">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2L21 7V17L12 22L3 17V7L12 2Z" stroke="#06b6d4" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 6L18 9.5V14.5L12 18L6 14.5V9.5L12 6Z" fill="rgba(6, 182, 212, 0.18)" stroke="#3b82f6" strokeWidth="1.2"/>
-                    <circle cx="12" cy="12" r="2.5" fill="#06b6d4"/>
+                    <path d="M12 2L21 7V17L12 22L3 17V7L12 2Z" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M12 6L18 9.5V14.5L12 18L6 14.5V9.5L12 6Z" fill="rgba(255, 255, 255, 0.15)" stroke="#ffffff" strokeWidth="1.2"/>
+                    <circle cx="12" cy="12" r="2.5" fill="#ffffff"/>
                   </svg>
                 </span>
                 <div className="nexus-brand-text">
                   <strong style={{ fontFamily: "'Outfit', 'Inter', sans-serif", fontSize: '15px', fontWeight: 700, letterSpacing: '0.03em' }}>
-                    NEXUS<span style={{ color: '#06b6d4' }}>//RETURNS</span>
+                    RETURNS<span style={{ color: '#ffffff', opacity: 0.85 }}> MANAGER</span>
                   </strong>
-                  <span className="nexus-version-pill">AI v2.4</span>
+                  <span className="nexus-version-pill">v2.4</span>
                 </div>
               </Link>
 
@@ -276,7 +276,7 @@ function Shell({ children }: { children: ReactNode }) {
           <div className="nexus-sub-bar">
             <div className="nexus-sub-left">
               <div className="nexus-crumb">
-                <span>NEXUS</span>
+                <span>RETURNS MANAGER</span>
                 <ChevronRight size={11} />
                 <span>Operations HQ</span>
                 <ChevronRight size={11} />
@@ -319,7 +319,7 @@ function Shell({ children }: { children: ReactNode }) {
               <div className="nexus-drawer-head">
                 <div className="nexus-brand-text">
                   <strong style={{ fontFamily: "'Outfit', 'Inter', sans-serif", fontSize: '15px', fontWeight: 700 }}>
-                    NEXUS<span style={{ color: '#06b6d4' }}>//RETURNS</span>
+                    RETURNS<span style={{ color: '#ffffff', opacity: 0.85 }}> MANAGER</span>
                   </strong>
                 </div>
                 <button className="icon-button" onClick={() => setMobile(false)}>

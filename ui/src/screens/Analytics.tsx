@@ -9,11 +9,11 @@ import { Header, Note } from './shared'
 
 const CHART_TOOLTIP = {
   contentStyle: {
-    backgroundColor: '#0c101a',
-    border: '1px solid rgba(6, 182, 212, 0.35)',
+    backgroundColor: '#0a0a0a',
+    border: '1px solid rgba(255, 255, 255, 0.25)',
     borderRadius: 8,
     fontSize: 12,
-    color: '#f8fafc',
+    color: '#ffffff',
     backdropFilter: 'blur(12px)',
   },
 } as const
@@ -60,7 +60,7 @@ export default function Analytics() {
                   <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#8e9bb0', fontSize: 11 }} />
                   <YAxis axisLine={false} tickLine={false} tick={{ fill: '#8e9bb0', fontSize: 11 }} allowDecimals={false} />
                   <Tooltip {...CHART_TOOLTIP} />
-                  <Bar dataKey="value" fill="#06b6d4" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="value" fill="#ffffff" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             )}

@@ -80,7 +80,7 @@ function SingleFilePicker({
           </>
         ) : (
           <>
-            <Upload size={32} style={{ color: '#06b6d4' }} />
+            <Upload size={32} style={{ color: '#ffffff' }} />
             <strong style={{ fontSize: '15px' }}>
               Choose a unified returns batch CSV file or drag and drop here
             </strong>

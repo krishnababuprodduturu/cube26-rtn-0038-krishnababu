@@ -5,7 +5,7 @@ import type { BatchJob, DerivedRow } from './types'
 
 export const DISPOSITION_COLORS: Record<string, string> = {
   restock: '#10b981',
-  refurbish: '#06b6d4',
+  refurbish: '#ffffff',
   liquidate: '#8b5cf6',
   dispose: '#f43f5e',
   wrong_product: '#ef4444',

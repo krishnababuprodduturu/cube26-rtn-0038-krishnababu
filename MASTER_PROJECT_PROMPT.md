@@ -1,6 +1,6 @@
-# CUBE26 RETURNS MANAGER (RTN-0045) — MASTER PROJECT DOSSIER & COMPREHENSIVE PROMPT
+# CUBE26 RETURNS MANAGER (RTN-0038) — MASTER PROJECT DOSSIER & COMPREHENSIVE PROMPT
 **Author:** Krishna Babu  
-**Track:** Cube26 Buildathon Round 2 — Track RTN-0045  
+**Track:** Cube26 Buildathon Round 2 — Track RTN-0038  
 **Project:** Returns Manager — *"Turn every returned package into a documented, auditable decision."*  
 **Date of Completion:** October 1, 2026  
 **Repository Branch:** `krishnababu`  
@@ -284,7 +284,7 @@ The codebase undergoes continuous automated verification across unit, property-b
 *Use the following prompt verbatim when onboarding any new AI coding agent, subagent, or auditor to this repository:*
 
 ```markdown
-You are an expert principal software engineer and reverse-logistics domain specialist working on the "Cube26 Returns Manager" codebase (Track RTN-0045).
+You are an expert principal software engineer and reverse-logistics domain specialist working on the "Cube26 Returns Manager" codebase (Track RTN-0038).
 
 ### Core Architectural Laws You Must Uphold:
 1. NEVER violate the Separation of Perception and Policy:
@@ -311,7 +311,7 @@ You are an expert principal software engineer and reverse-logistics domain speci
 ## 8. Repository File Directory Index
 
 ```
-cube26-rtn-0045-krishnababu/
+cube26-rtn-0038-krishnababu/
 ├── agent/                                # Backend Python Application
 │   ├── src/returns_manager/
 │   │   ├── api/                          # FastAPI REST Endpoints & OpenAPI

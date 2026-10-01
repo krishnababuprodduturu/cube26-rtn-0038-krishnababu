@@ -6,24 +6,24 @@
 
 /* ── 1. Core Tokens & Neutral Base ──────────────────────────────────────── */
 :root {
-  --rm-canvas: #080b12;
-  --rm-surface: #0e1422;
-  --rm-surface-elevated: #141c2e;
-  --rm-surface-hover: #1a253c;
+  --rm-canvas: #000000;
+  --rm-surface: #0a0a0a;
+  --rm-surface-elevated: #141414;
+  --rm-surface-hover: #1f1f1f;
   
-  --rm-border: rgba(255, 255, 255, 0.08);
-  --rm-border-subtle: rgba(255, 255, 255, 0.05);
-  --rm-border-hover: rgba(6, 182, 212, 0.4);
-  --rm-border-focus: #06b6d4;
+  --rm-border: rgba(255, 255, 255, 0.12);
+  --rm-border-subtle: rgba(255, 255, 255, 0.06);
+  --rm-border-hover: rgba(255, 255, 255, 0.4);
+  --rm-border-focus: #ffffff;
 
-  --rm-text-primary: #f8fafc;
-  --rm-text-secondary: #94a3b8;
-  --rm-text-muted: #64748b;
+  --rm-text-primary: #ffffff;
+  --rm-text-secondary: #a1a1aa;
+  --rm-text-muted: #71717a;
 
-  --rm-emerald: #06b6d4;
-  --rm-emerald-hover: #0891b2;
-  --rm-emerald-dim: rgba(6, 182, 212, 0.14);
-  --rm-emerald-border: rgba(6, 182, 212, 0.35);
+  --rm-emerald: #ffffff;
+  --rm-emerald-hover: #e4e4e7;
+  --rm-emerald-dim: rgba(255, 255, 255, 0.1);
+  --rm-emerald-border: rgba(255, 255, 255, 0.25);
 
   --rm-amber: #f59e0b;
   --rm-amber-dim: rgba(245, 158, 11, 0.14);
@@ -33,21 +33,21 @@
   --rm-red-dim: rgba(244, 63, 94, 0.14);
   --rm-red-border: rgba(244, 63, 94, 0.35);
 
-  --rm-blue: #3b82f6;
-  --rm-blue-dim: rgba(59, 130, 246, 0.14);
-  --rm-blue-border: rgba(59, 130, 246, 0.35);
+  --rm-blue: #ffffff;
+  --rm-blue-dim: rgba(255, 255, 255, 0.1);
+  --rm-blue-border: rgba(255, 255, 255, 0.25);
 
-  --rm-violet: #8b5cf6;
-  --rm-violet-dim: rgba(139, 92, 246, 0.14);
-  --rm-violet-border: rgba(139, 92, 246, 0.35);
+  --rm-violet: #d4d4d8;
+  --rm-violet-dim: rgba(255, 255, 255, 0.08);
+  --rm-violet-border: rgba(255, 255, 255, 0.2);
 
   --rm-radius-sm: 5px;
   --rm-radius-md: 8px;
   --rm-radius-lg: 12px;
 
-  --rm-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
-  --rm-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
-  --rm-shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.75);
+  --rm-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.8);
+  --rm-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.85);
+  --rm-shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.95);
 }
 
 /* ── 2. Shell & Workspace Layout ───────────────────────────────────────── */
@@ -117,7 +117,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.45));
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.25));
 }
 
 .dashboard-shell .cube-mark {
@@ -127,18 +127,18 @@
   grid-template-columns: 1fr 1fr;
   gap: 2.5px;
   transform: none;
-  filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.55));
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.25));
 }
 
 .dashboard-shell .cube-mark i {
-  background: #06b6d4;
+  background: #ffffff;
   border-radius: 2px;
-  box-shadow: 0 0 6px rgba(6, 182, 212, 0.45);
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.35);
 }
 
-.dashboard-shell .cube-mark i:nth-child(2) { background: #3b82f6; }
-.dashboard-shell .cube-mark i:nth-child(3) { background: #0891b2; }
-.dashboard-shell .cube-mark i:nth-child(4) { background: #8b5cf6; }
+.dashboard-shell .cube-mark i:nth-child(2) { background: #d4d4d8; }
+.dashboard-shell .cube-mark i:nth-child(3) { background: #a1a1aa; }
+.dashboard-shell .cube-mark i:nth-child(4) { background: #71717a; }
 
 .dashboard-shell .workspace {
   height: 44px;
@@ -510,7 +510,7 @@
   top: 0;
   bottom: 0;
   width: 3px;
-  background: linear-gradient(180deg, #06b6d4 0%, #3b82f6 100%);
+  background: #ffffff;
   border-radius: 14px 0 0 14px;
 }
 
@@ -520,13 +520,13 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #06b6d4;
+  color: #ffffff;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   margin-bottom: 6px;
-  background: rgba(6, 182, 212, 0.08);
-  border: 1px solid rgba(6, 182, 212, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
   padding: 2px 8px;
   border-radius: 4px;
 }
@@ -603,15 +603,15 @@
 .button.primary {
   background: var(--rm-emerald) !important;
   border-color: var(--rm-emerald) !important;
-  color: #05160e !important;
+  color: #000000 !important;
   font-weight: 600;
-  box-shadow: 0 1px 3px rgba(16, 185, 129, 0.3) !important;
+  box-shadow: 0 1px 3px rgba(255, 255, 255, 0.2) !important;
 }
 
 .button.primary:hover:not(:disabled) {
   background: var(--rm-emerald-hover) !important;
   border-color: var(--rm-emerald-hover) !important;
-  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.4) !important;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.35) !important;
 }
 
 /* ── 7. Metric Tiles System (Precision Enterprise KPI) ─────────────────── */

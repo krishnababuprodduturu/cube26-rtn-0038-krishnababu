@@ -130,16 +130,16 @@ export default function CinematicOverview() {
       {/* Top Header Navigation */}
       <header className="apex-auth-nav">
         <div className="apex-auth-brand">
-          <div className="apex-brand-icon" style={{ background: 'rgba(6, 182, 212, 0.12)', border: '1px solid rgba(6, 182, 212, 0.35)', borderRadius: '10px' }}>
+          <div className="apex-brand-icon" style={{ background: 'rgba(255, 255, 255, 0.1)', border: '1px solid rgba(255, 255, 255, 0.25)', borderRadius: '10px' }}>
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L21 7V17L12 22L3 17V7L12 2Z" stroke="#06b6d4" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M12 6L18 9.5V14.5L12 18L6 14.5V9.5L12 6Z" fill="rgba(6, 182, 212, 0.2)" stroke="#3b82f6" strokeWidth="1.2"/>
-              <circle cx="12" cy="12" r="2.5" fill="#06b6d4"/>
+              <path d="M12 2L21 7V17L12 22L3 17V7L12 2Z" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12 6L18 9.5V14.5L12 18L6 14.5V9.5L12 6Z" fill="rgba(255, 255, 255, 0.15)" stroke="#ffffff" strokeWidth="1.2"/>
+              <circle cx="12" cy="12" r="2.5" fill="#ffffff"/>
             </svg>
           </div>
           <div className="apex-brand-text">
-            <div className="apex-brand-title">NEXUS<span>//RETURNS</span></div>
-            <span className="apex-brand-badge" style={{ background: 'rgba(6, 182, 212, 0.18)', color: '#38bdf8', borderColor: 'rgba(6, 182, 212, 0.35)' }}>VISION OS 2.4</span>
+            <div className="apex-brand-title">RETURNS<span> MANAGER</span></div>
+            <span className="apex-brand-badge" style={{ background: 'rgba(255, 255, 255, 0.1)', color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.25)' }}>VISION OS 2.4</span>
           </div>
         </div>
 
@@ -170,7 +170,7 @@ export default function CinematicOverview() {
               className="apex-btn-header"
               onClick={handleInstantDemo}
             >
-              <Sparkles size={13} style={{ color: '#06b6d4' }} />
+              <Sparkles size={13} style={{ color: '#ffffff' }} />
               <span>Instant Demo Access</span>
             </button>
           )}
@@ -425,7 +425,7 @@ export default function CinematicOverview() {
                       className="apex-btn-secondary"
                       onClick={handleInstantDemo}
                     >
-                      <Zap size={14} style={{ color: '#ffaa33' }} />
+                      <Zap size={14} style={{ color: '#ffffff' }} />
                       <span>One-Click Demo Access</span>
                     </button>
                   </div>
@@ -445,7 +445,7 @@ export default function CinematicOverview() {
       {/* Bottom Legal & Node Telemetry Footer */}
       <footer className="apex-auth-footer">
         <div className="apex-footer-left">
-          <span>NEXUS // RETURNS v2.4.0</span>
+          <span>RETURNS MANAGER v2.4.0</span>
           <span className="apex-footer-sep">/</span>
           <span>AUTONOMOUS VISION LOGISTICS PLATFORM</span>
         </div>
